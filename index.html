@@ -205,6 +205,31 @@ E(Y-\hat Y)^2 = E[f(X)+\epsilon-\hat f(X)]^2=[f(X)-\hat f(X)]^2+Var(\epsilon)
 \]</span> where <span class="math inline">\(E(Y-\hat Y)^2\)</span> represents the average, or expected value, of the squared difference between the predicted and actual value of <span class="math inline">\(Y\)</span> , and <span class="math inline">\(Var(\epsilon)\)</span> represents the variance associated with the error term <span class="math inline">\(\epsilon\)</span> .</p>
 <h3 id="inference">Inference</h3>
 <p>We are often interested in understanding the way that <span class="math inline">\(Y\)</span> is affected as <span class="math inline">\(X_1,X_2,...,X_p\)</span> change. In this situation we wish to estimate <span class="math inline">\(f\)</span>, but our goal is not necessarily to make predictions for <span class="math inline">\(Y\)</span> . We instead want to understand the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> , or more specifically, to understand how <span class="math inline">\(Y\)</span> changes as a function of <span class="math inline">\(X_1,X_2,...,X_p\)</span>. Now <span class="math inline">\(\hat f\)</span> cannot be treated as a black box, because we need to know its <strong>exact form</strong>.</p>
+<h2 id="how-do-we-estimate-f">1.3 How Do We Estimate f?</h2>
+<p>Let <span class="math inline">\(x_{ij}\)</span> represent the value of the <span class="math inline">\(j_{th}\)</span> predictor, or input, for observation <span class="math inline">\(i\)</span>, where <span class="math inline">\(i = 1,2,...,n\)</span> and <span class="math inline">\(j = 1,2,...,p\)</span> . Correspondingly, let <span class="math inline">\(y_i\)</span> represent the response variable for the <span class="math inline">\(i_{th}\)</span> observation. Then our training data consist of <span class="math inline">\({(x_1,y_1),(x_2,y_2),...,(x_n,y_n)}\)</span> where <span class="math inline">\(x_i =(x_{i1},x_{i2},...,x_{ip})^T\)</span>. Broadly speaking, most statistical learning methods for this task can be character- ized as either <strong>parametric</strong> or <strong>non-parametric</strong>.</p>
+<h3 id="parametric-methods">Parametric Methods</h3>
+<p>First, we make an assumption about the functional form, or shape, of <span class="math inline">\(f\)</span>. For example, one very simple assumption is that <span class="math inline">\(f\)</span> is linear in <span class="math inline">\(X\)</span>: <span class="math display">\[
+f(X) = β_0 +β_1X_1 +β_2X_2 +...+β_pX_p
+\]</span></p>
+<ul>
+<li><p>Adavantages</p>
+<p>The model-based approach just described is referred to as parametric; it reduces the problem of estimating <span class="math inline">\(f\)</span> down to one of estimating a set of parameters.</p></li>
+<li><p>Disadvantages</p>
+<p>If the chosen model is too far from the true <span class="math inline">\(f\)</span>, then our estimate will be poor. We can try to address this problem by choosing flexible models that can fit many different possible functional forms for <span class="math inline">\(f\)</span>. But in general, fitting a more flexible model requires estimating a greater number of parameters. These more complex models can lead to a phenomenon known as <strong>overfitting</strong> the data, which essentially means they follow the <strong>errors</strong>, or <strong>noise</strong>, too closely.</p></li>
+</ul>
+<h3 id="non-parametric-methods">Non-parametric Methods</h3>
+<p>Non-parametric methods do not make explicit assumptions about the func- tional form of <span class="math inline">\(f\)</span> .</p>
+<ul>
+<li><p>Advantages</p>
+<p>Such approaches can have a major advantage over parametric approaches: by avoiding the assumption of a particular functional form for <span class="math inline">\(f\)</span>, they have the potential to accurately fit a wider range of possible shapes for <span class="math inline">\(f\)</span>.</p></li>
+<li><p>Disadvantages</p>
+<p>But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <span class="math inline">\(f\)</span> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <span class="math inline">\(f\)</span>.</p></li>
+</ul>
+<p><img src="/2020/05/15/sl1/2.3.jpg"></p>
+<center>
+A smooth thin-plate splie fit to the Income data.
+</center>
+<h2 id="the-trade-off-between-prediction-accuracy-and-model-interpretability">1.4 The Trade-Off Between Prediction Accuracy and Model Interpretability</h2>
 
       
 
@@ -629,23 +654,5 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
 </body>
 </html>
