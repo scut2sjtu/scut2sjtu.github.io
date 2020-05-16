@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/15/sl1/2.2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/05/15/sl1/2.3.jpg">
 <meta property="article:published_time" content="2020-05-14T17:33:09.000Z">
-<meta property="article:modified_time" content="2020-05-16T16:36:29.490Z">
+<meta property="article:modified_time" content="2020-05-16T16:38:49.273Z">
 <meta property="article:author" content="cyq">
 <meta property="article:tag" content="统计">
 <meta name="twitter:card" content="summary">
@@ -216,19 +216,23 @@ E(Y-\hat Y)^2 = E[f(X)+\epsilon-\hat f(X)]^2=[f(X)-\hat f(X)]^2+Var(\epsilon)
 f(X) = β_0 +β_1X_1 +β_2X_2 +...+β_pX_p
 \]</span></p>
 <ul>
-<li><p>Adavantages</p>
-<p>The model-based approach just described is referred to as parametric; it reduces the problem of estimating <span class="math inline">\(f\)</span> down to one of estimating a set of parameters.</p></li>
-<li><p>Disadvantages</p>
-<p>If the chosen model is too far from the true <span class="math inline">\(f\)</span>, then our estimate will be poor. We can try to address this problem by choosing flexible models that can fit many different possible functional forms for <span class="math inline">\(f\)</span>. But in general, fitting a more flexible model requires estimating a greater number of parameters. These more complex models can lead to a phenomenon known as <strong>overfitting</strong> the data, which essentially means they follow the <strong>errors</strong>, or <strong>noise</strong>, too closely.</p></li>
+<li>Adavantages</li>
 </ul>
+<p>The model-based approach just described is referred to as parametric; it reduces the problem of estimating <span class="math inline">\(f\)</span> down to one of estimating a set of parameters.</p>
+<ul>
+<li>Disadvantages</li>
+</ul>
+<p>If the chosen model is too far from the true <span class="math inline">\(f\)</span>, then our estimate will be poor. We can try to address this problem by choosing flexible models that can fit many different possible functional forms for <span class="math inline">\(f\)</span>. But in general, fitting a more flexible model requires estimating a greater number of parameters. These more complex models can lead to a phenomenon known as <strong>overfitting</strong> the data, which essentially means they follow the <strong>errors</strong>, or <strong>noise</strong>, too closely.</p>
 <h3 id="non-parametric-methods">Non-parametric Methods</h3>
 <p>Non-parametric methods do not make explicit assumptions about the func- tional form of <span class="math inline">\(f\)</span> .</p>
 <ul>
-<li><p>Advantages</p>
-<p>Such approaches can have a major advantage over parametric approaches: by avoiding the assumption of a particular functional form for <span class="math inline">\(f\)</span>, they have the potential to accurately fit a wider range of possible shapes for <span class="math inline">\(f\)</span>.</p></li>
-<li><p>Disadvantages</p>
-<p>But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <span class="math inline">\(f\)</span> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <span class="math inline">\(f\)</span>.</p></li>
+<li>Advantages</li>
 </ul>
+<p>Such approaches can have a major advantage over parametric approaches: by avoiding the assumption of a particular functional form for <span class="math inline">\(f\)</span>, they have the potential to accurately fit a wider range of possible shapes for <span class="math inline">\(f\)</span>.</p>
+<ul>
+<li>Disadvantages</li>
+</ul>
+<p>But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <span class="math inline">\(f\)</span> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <span class="math inline">\(f\)</span>.</p>
 <p><img src="/2020/05/15/sl1/2.3.jpg"></p>
 <center>
 A smooth thin-plate splie fit to the Income data.
@@ -659,5 +663,23 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
 </body>
 </html>
