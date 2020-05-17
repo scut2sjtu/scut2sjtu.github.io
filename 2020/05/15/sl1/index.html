@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/15/sl1/2.4.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/05/15/sl1/2.5.jpg">
 <meta property="article:published_time" content="2020-05-14T17:33:09.000Z">
-<meta property="article:modified_time" content="2020-05-17T13:28:53.915Z">
+<meta property="article:modified_time" content="2020-05-17T13:34:22.663Z">
 <meta property="article:author" content="cyq">
 <meta property="article:tag" content="统计">
 <meta name="twitter:card" content="summary">
@@ -198,6 +198,7 @@
 <p>Suppose that we observe a quantitative <strong>response</strong> Y and p different <strong>predictors</strong>, <span class="math inline">\(X_1,X_2,...,X_p\)</span>. We assume that there is some relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X=(X_1,X_2,...,X_p)\)</span>, which can be written in the general form <span class="math display">\[
 Y=f(X)+\epsilon
 \]</span> Here <span class="math inline">\(\epsilon\)</span> is a random error term. which is independent of <span class="math inline">\(X\)</span> and has mean zero.</p>
+<a id="more"></a>
 <center>
 <img src="/2020/05/15/sl1/2.2.jpg">
 </center>
@@ -237,12 +238,16 @@ f(X) = β_0 +β_1X_1 +β_2X_2 +...+β_pX_p
 <li>Disadvantages</li>
 </ul>
 <p>But non-parametric approaches do suffer from a major disadvantage: since they do not reduce the problem of estimating <span class="math inline">\(f\)</span> to a small number of parameters, a very large number of observations (far more than is typically needed for a parametric approach) is required in order to obtain an accurate estimate for <span class="math inline">\(f\)</span>.</p>
-<p><img src="/2020/05/15/sl1/2.3.jpg"></p>
+<center>
+<img src="/2020/05/15/sl1/2.3.jpg">
+</center>
 <center>
 A smooth thin-plate splie fit to the Income data.
 </center>
 <h3 id="the-trade-off-between-prediction-accuracy-and-model-interpretability">1.1.3 The Trade-Off Between Prediction Accuracy and Model Interpretability</h3>
-<p><img src="/2020/05/15/sl1/2.4.jpg"></p>
+<center>
+<img src="/2020/05/15/sl1/2.4.jpg">
+</center>
 <center>
 Provides an illustration of the trade-off between flexibility and interpretability for some of the methods that we cover in this book.
 </center>
@@ -268,7 +273,9 @@ E(y_0-\hat f(x_0))^2=&amp; E(f(x_0)+\epsilon-\hat f(x_0))^2\\
 \end{align}
 \]</span> <strong>Variance</strong> refers to the amount by which <span class="math inline">\(\hat f\)</span> would change if we estimated it using a different training data set.</p>
 <p><strong>Bias</strong> refers to the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model.</p>
-<p><img src="/2020/05/15/sl1/2.5.jpg"></p>
+<center>
+<img src="/2020/05/15/sl1/2.5.jpg">
+</center>
 <center>
 Squared bias (blue curve), variance (orange curve), <span class="math inline">\(Var(\epsilon)\)</span> (dashed line), and test MSE (red curve) for the three data sets in Figures above. The vertical dotted line indicates the flexibility level corresponding to the smallest test MSE.
 </center>
