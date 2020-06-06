@@ -164,6 +164,279 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-glossary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/07/glossary/">glossary</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/07/glossary/" class="archive-article-date">
+  	<time datetime="2020-06-06T16:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="glossary">Glossary</h1>
+<h3 id="cross-correlation互相关">1. cross-correlation（互相关）</h3>
+<p>In <a href="https://en.wikipedia.org/wiki/Signal_processing" target="_blank" rel="noopener">signal processing</a>, <strong>cross-correlation</strong> is a <a href="https://en.wikipedia.org/wiki/Similarity_measure" target="_blank" rel="noopener">measure of similarity</a> of two series as a function of the displacement of one relative to the other. This is also known as a <em>sliding <a href="https://en.wikipedia.org/wiki/Dot_product" target="_blank" rel="noopener">dot product</a></em> or <em>sliding inner-product</em>.</p>
+<p>Notes：</p>
+<ol type="1">
+<li><p>计算方式：<span class="math inline">\(S(i,j)=(I*K)(i,j)=\sum_m\sum_nI(i+m,j+n)K(m,n)\)</span></p></li>
+<li><p>convolution(卷积)的区别：后者具有对称性，在图像处理时，需要进行kernel反转</p></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">术语</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/术语//" class="article-tag-list-link color3">术语</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/06/07/glossary/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-anomalyDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/24/anomalyDetection/">anomalyDetection</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/24/anomalyDetection/" class="archive-article-date">
+  	<time datetime="2020-05-24T09:09:05.108Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="anomaly-detection">Anomaly Detection</h1>
+<blockquote>
+<p>Anomaly Detection : A Survey</p>
+</blockquote>
+<h2 id="introduction">1. Introduction</h2>
+<h3 id="what-are-anomalies">1.1 What are anomalies?</h3>
+<p><strong>Anomaly detection</strong> refers to the problem of finding patterns in data that do not conform to expected behavior. These non-conforming patterns are often referred to as <strong>anomalies, outliers, discordant observations, exceptions, aberrations, surprises, peculiarities or contaminants</strong> in different application domains. Another topic related to anomaly detection is <strong>novelty detection</strong> which aims at detecting previously unobserved (emergent, novel) patterns in the data.</p>
+<h3 id="challenges">1.2 Challenges</h3>
+<ul>
+<li>boundary problem</li>
+<li>anomalous observations appear like normal</li>
+<li>normal behavior keeps evolving</li>
+<li>different application domains</li>
+<li>no-labeled</li>
+<li>noise disturbance</li>
+</ul>
+<h2 id="different-aspects-of-an-anomaly-detection-problem">2. Different aspects of an anomaly detection problem</h2>
+<h3 id="nature-of-input-data">2.1 Nature of input data</h3>
+<p>Input is generally a collection of data <strong>instances</strong>(also referred as <em>object, record, point, vector, pattern, event, case, sample, observation, entity</em>). Each data instance can be described using a set of <strong>attributes</strong>(also refered to as <em>variable, characteristic, featrue, field, dimension</em>). The attributes an be different types such as <em>binary, categorical or continuous</em>.</p>
+<p>In general, data instances can be related to each other, some examples are <em>sequence data, spatial data, and graph data</em>.</p>
+<h3 id="type-of-anomaly">2.2 Type of anomaly</h3>
+<h4 id="point-anomalies.">2.2.1 Point Anomalies.</h4>
+<p>If an individual data instance can be considered as anomalous with respect to the rest of data, then the instance is termed as a <strong>point anomaly</strong>.</p>
+<p>As a real life example, consider credit card fraud detection.</p>
+<h4 id="contextual-anomalies.">2.2.2 Contextual Anomalies.</h4>
+<p>If a data instance is anomalous in a specific context, then it is termed as a <strong>contextual anomaly</strong> (also referred to as <strong>conditional anomaly</strong>).</p>
+<p>(1). Contextual attributes</p>
+<p>(2). Behavioral attributes</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/24/anomalyDetection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-sl2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/17/sl2/">Statistical Learning</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/17/sl2/" class="archive-article-date">
+  	<time datetime="2020-05-17T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="linear-regression">Linear Regression</h1>
+<h2 id="simple-linear-regression">2.1 Simple Linear Regression</h2>
+<p>It assumes that there is approximately a linear relationship between X and Y . Mathematically, we can write this linear relationship as <span class="math display">\[
+Y \approx \beta_0+\beta_1X
+\]</span></p>
+        
+          <a class="article-more-a" href="/2020/05/17/sl2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">统计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/统计学习//" class="article-tag-list-link color5">统计学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/17/sl2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-sl1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -455,6 +728,10 @@ MathJax.Hub.Queue(function() {
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图谱</a>
