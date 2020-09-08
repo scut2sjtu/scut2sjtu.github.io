@@ -164,6 +164,233 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-连续性变量的相关性分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/">相关关系</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2020-09-09T04:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="变量的相关性分析">变量的相关性分析</h1>
+<h2 id="关系的定义">关系的定义</h2>
+<p>变量之间关系分为<strong>确定性关系</strong>，即函数关系和<strong>不确定性关系</strong>，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。</p>
+<h2 id="相关分析">相关分析</h2>
+<h3 id="连续型变量的线性相关分析">连续型变量的线性相关分析</h3>
+<p>采用Pearson相关系数<span class="math inline">\(r\)</span>进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数<span class="math inline">\(r\)</span>进行假设检验，构造样本相关系数的t-检验统计量。 <span class="math display">\[
+r = \frac{Conv(X,Y)}{Var(X)Var(Y)}
+\]</span> 假设检验用到的t-检验统计量 <span class="math display">\[
+t = \frac{|r|}{\sqrt\frac{1-r^2}{n-2}} \sim t(n-2)
+\]</span></p>
+<h3 id="spearman相关系数">spearman相关系数</h3>
+<p>斯皮尔曼相关系数被定义为等级变量的皮尔逊相关系数，针对秩次的线性相关性分析，计算公式如下 <span class="math display">\[
+\rho = 1-\frac{6\sum d^2_i}{n(n^2-1)},d_i = x_i - y_i
+\]</span></p>
+<h3 id="分类型变量的相关性分析-kendall相关系数">分类型变量的相关性分析-kendall相关系数</h3>
+<p><span class="math display">\[
+\tau = \frac{(number\ of\ concordant\ pairs)-(number\ of\ discordant\ pairs)}{\frac1 2 n(n-1)}
+\]</span></p>
+<h3 id="连续型变量和二元分类变量的相关性分析-point-biserial相关系数">连续型变量和二元分类变量的相关性分析-Point-Biserial相关系数</h3>
+<p><span class="math display">\[
+r_{pb}=\frac{M_1-M_0}{s_n}\sqrt {pq}
+\]</span></p>
+<p>其中</p>
+<p>$ M_1$表示二元变量“1”对应的连续变量的均值</p>
+<p><span class="math inline">\(M_0\)</span> 表示二元变量“0”对应的连续变量的均值</p>
+<p><span class="math inline">\(S_n\)</span>表示连续变量的标准偏差</p>
+<p><span class="math inline">\(p\)</span> 表示二元变量“1”对象占总对象的比例</p>
+<p><span class="math inline">\(q\)</span> 表示二元变量“0”对象占总对象的比例</p>
+<h3 id="偏相关性分析">偏相关性分析</h3>
+<p>Partial correlation is a method used to describe the relationship between two variables <strong>whilst taking away the effects of another variable</strong>, or several other variables, on this relationship.</p>
+<p>Consider a correlation matrix for variables A, B and C <span class="math display">\[
+\begin{equation}       %开始数学环境
+\left(                 %左括号
+  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
+    * &amp; * &amp; *\\  %第一行元素
+    r_{AB} &amp; * &amp; *\\  %第二行元素
+    r_{AC} &amp; r_{BC} &amp; *
+  \end{array}
+\right)                 %右括号
+\end{equation}
+\]</span> The partial correlation of A and B adjusted for C is: <span class="math display">\[
+r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
+\]</span></p>
+<h3 id="卡方检验">卡方检验</h3>
+<p>一种非参数检验，不存在具体参数和总体分布的假设检验。</p>
+<h4 id="卡方拟合优度检验">卡方拟合优度检验</h4>
+<p><span class="math display">\[
+\chi ^2 = \sum \frac{(f_o-f_e)^2}{f_e}
+\]</span></p>
+<p>其中<span class="math inline">\(f_o\)</span>表示观测频数，<span class="math inline">\(f_e\)</span>表示期望频数。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">相关性</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据挖掘//" class="article-tag-list-link color5">数据挖掘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PageRank" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/05/PageRank/">pagerank</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/05/PageRank/" class="archive-article-date">
+  	<time datetime="2020-09-05T07:24:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pagerank">PageRank</h1>
+<h2 id="pagerank基本定义">PageRank基本定义</h2>
+<p>​ 给定一个包含n个结点<span class="math inline">\(v_1,v_2,...,v_n\)</span>的强连通且非周期性的有向图，在有向图上定义随机游走模型（一阶Markov链）。随机游走的特点是从一个结点到有有向边连出的所有结点的转移概率相等，转移矩阵为M，这个Markov链具有平稳分布R（ <span class="math inline">\(MR=R\)</span>），平稳分布R成为这个有向图的PageRank。R的各个分量称为各个结点的PageRank值。</p>
+<h2 id="pagerank一般定义">PageRank一般定义</h2>
+<p>​ 给定一个含有n个结点的任意有向图，在有向图上定义一个一般的随机游走模型。一般的随机游走模型有两部分组成，一部分是有向图的基本转移矩阵M，表示从一个结点到其连出的所有结点的转移概率相等，另一部分是完全随机的转移矩阵，表示从任意一个结点到任意一个结点的转移概率都是1/n，线性组合系数为阻尼因子<span class="math inline">\(d(0&lt;=d&lt;=1)\)</span>。这个一般随机游走的Markov链存在平稳分布，记作R。定义平稳分布向量R为这个有向图的一般PageRank。R由公式 <span class="math display">\[
+R = dMR+\frac{1-d}n1
+\]</span> 决定，其中1是所有分量为1的n维向量。</p>
+<h2 id="pagerank的计算">PageRank的计算</h2>
+<p>计算方法包括迭代算法、幂法、代数算法</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">挖掘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据挖掘//" class="article-tag-list-link color5">数据挖掘</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/05/PageRank/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-glossary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -445,6 +672,91 @@ Y=f(X)+\epsilon
 
 
   
+    <article id="post-kg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/10/kg/">知识图谱构建</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/10/kg/" class="archive-article-date">
+  	<time datetime="2020-05-09T17:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="section"></h2>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图谱</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/10/kg/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-anomalyDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -528,91 +840,6 @@ Y=f(X)+\epsilon
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/10/anomalyDetection/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/10/kg/">知识图谱构建</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/10/kg/" class="archive-article-date">
-  	<time datetime="2020-05-09T17:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="section"></h2>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图谱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/10/kg/">展开全文 >></a>
         </p>
       
 
@@ -756,11 +983,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">异常</a>
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+                <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -768,7 +1003,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
+                <a href="javascript:void(0)" class="js-tag color4">相关性</a>
               </li>
             
             <div class="clearfix"></div>
