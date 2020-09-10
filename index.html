@@ -164,6 +164,150 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-时间序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">时间序列</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" class="archive-article-date">
+  	<time datetime="2020-09-10T16:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="时间序列数据分析">时间序列数据分析</h1>
+<h2 id="指数滑动平均">指数滑动平均</h2>
+<p>一般形式的加权移动平均 <span class="math display">\[
+y_t = \frac{\sum^t_{i=0}\omega_ix_{t-i}}{\sum^t_{i=0}\omega_i}
+\]</span> 其中<span class="math inline">\(x_t\)</span>是输入， <span class="math inline">\(y_t\)</span>是加权平均的输出，<span class="math inline">\(\omega_i\)</span>是权重。对于上式，取<span class="math inline">\(\omega_i=(1-\alpha)^i\)</span>，得到下式 <span class="math display">\[
+y_t = \frac{x_t+(1-\alpha)x_{t-1}+(1-\alpha)^2x_{t-2}+...+(1-\alpha)^tx_0}{1+(1-\alpha)+(1-\alpha)^2+...+(1-\alpha)^t}
+\]</span> 一般用通用的迭代公式表示如下 <span class="math display">\[
+y_0 = x_0 \\
+y_t = (1-\alpha)y_{t-1} + \alpha x_t
+\]</span></p>
+<h2 id="时间序列的自相关和偏自相关">时间序列的自相关和偏自相关</h2>
+<ul>
+<li>自相关系数</li>
+</ul>
+<p>一般针对不同时间区间的同一时间序列进行计算，公式如下 <span class="math display">\[
+\rho_l = \frac{Cov(X_k,X_{k-l})}{Var(X_k)} = \frac {\gamma_l}{\gamma_0}
+\]</span></p>
+<ul>
+<li>偏自相关系数</li>
+</ul>
+<p>计算较为繁琐，暂忽略</p>
+<h2 id="时间序列的平稳性">时间序列的平稳性</h2>
+<p>平稳性分为弱平稳和强平稳，一般弱平稳应用较为广泛。时间序列标记为<span class="math inline">\(\{X_t\}\)</span>，平稳的时间序列的性质不随观测时间的变化而变化，因此具有趋势或季节性的时间序列不是平稳时间序列。</p>
+<ul>
+<li><p>强平稳</p>
+<p>对于<span class="math inline">\(k\in Z\)</span>,<span class="math inline">\((X_1,X_2,...,X_n)^T和(X_{1+k},X_{2+k},...,X_{n+k})^T\)</span>是同分布的</p></li>
+<li><p>弱平稳</p></li>
+</ul>
+<p><span class="math inline">\({\forall}t\in N,EX_t^2&lt;+\infty\)</span></p>
+<p><span class="math inline">\({\forall}t\in N,EX_t^2=\mu\)</span> 时间序列任意时刻的随机变量的期望值恒定</p>
+<p><span class="math inline">\({\forall}t,s\in N,E[(X_t-\mu)(X_s-\mu)]=\gamma_{t-s}\)</span> 时间序列的任意两个时刻的随机变量的协方差只与时间间隔间隔有关</p>
+<ul>
+<li><p>单位根检验：判断序列是否平稳，常见的单位根检验方法有ADF检验、PP检验</p>
+<p>Augmented Dickey-Fuller test可以测试一个自回归模型是否存在单位根（unit root）</p></li>
+</ul>
+<h2 id="时间序列的预测方法">时间序列的预测方法</h2>
+<p>传统的预测方法有上面介绍的指数滑动平均法，还有时间序列常用的AR，MA，ARMA等模型</p>
+<ul>
+<li>AR模型</li>
+</ul>
+<p>具有如下结构的是p阶自回归模型(auto regression)，记为AR(p)。 <span class="math display">\[
+X_t = \phi _0 + \phi _1X_{t-1} + \phi _2 X_{t-2} + ... + \phi _p X_{t-p} + \epsilon _t
+\]</span> 其中随机变量<span class="math inline">\(X_t\)</span>是前p个随机变量的多元线性回归，误差项为白噪声<span class="math inline">\(\epsilon_t\)</span>。</p>
+<ul>
+<li>MA模型</li>
+</ul>
+<p>具有如下结构的是q阶滑动平均模型(moving average)，记为MA(q) <span class="math display">\[
+X_t = \mu + \epsilon _t - \theta_1\epsilon_{t-1}-\theta_2\epsilon_{t-2}-...-\theta_q\epsilon_{t-q}
+\]</span> 其中随机变量<span class="math inline">\(X_t\)</span>是前q个随机扰动的的多元线性回归，误差项为白噪声<span class="math inline">\(\epsilon_t\)</span>。</p>
+<ul>
+<li>ARMA模型</li>
+</ul>
+<p>ARMA(p,q)模型是最常用的平稳序列拟合模型，随机变量<span class="math inline">\(X_t\)</span>的取值不仅与之前p个的序列值有关还与前q个随机扰动有关。 <span class="math display">\[
+X_t = \phi _0 + \phi _1X_{t-1} + \phi _2 X_{t-2} + ... + \phi _p X_{t-p} + \epsilon _t- \theta_1\epsilon_{t-1}-\theta_2\epsilon_{t-2}-...-\theta_q\epsilon_{t-q}
+\]</span> 这个是最常用的预测模型，一般步骤如下：</p>
+<ol type="1">
+<li>对时间序列数据进行平稳性检验，如果不平稳可进行查分后检验；</li>
+<li>对平稳序列进行定阶，估计p和q；</li>
+<li>用ARMA(p,q)模型预测<span class="math inline">\(X_{t+1}\)</span></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">time-series</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/时序分析//" class="article-tag-list-link color5">时序分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-连续性变量的相关性分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -672,91 +816,6 @@ Y=f(X)+\epsilon
 
 
   
-    <article id="post-kg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/10/kg/">知识图谱构建</a>
-    </h1>
-  
-
-        
-        <a href="/2020/05/10/kg/" class="archive-article-date">
-  	<time datetime="2020-05-09T17:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="section"></h2>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图谱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/10/kg/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-anomalyDetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -840,6 +899,91 @@ Y=f(X)+\epsilon
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/05/10/anomalyDetection/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-kg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/10/kg/">知识图谱构建</a>
+    </h1>
+  
+
+        
+        <a href="/2020/05/10/kg/" class="archive-article-date">
+  	<time datetime="2020-05-09T17:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="section"></h2>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图谱</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/知识图谱//" class="article-tag-list-link color5">知识图谱</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/05/10/kg/">展开全文 >></a>
         </p>
       
 
@@ -983,15 +1127,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -999,11 +1135,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">统计</a>
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">time-series</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">相关性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">统计</a>
               </li>
             
             <div class="clearfix"></div>
