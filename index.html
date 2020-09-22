@@ -164,19 +164,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-LGBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-GBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/23/LGBM/">GBM</a>
+      <a class="article-title" href="/2020/09/23/GBM/">GBM</a>
     </h1>
   
 
         
-        <a href="/2020/09/23/LGBM/" class="archive-article-date">
+        <a href="/2020/09/23/GBM/" class="archive-article-date">
   	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
 </a>
         
@@ -184,61 +184,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="lightgbm-a-highly-efficient-gradient-boosting-decision-tree">LightGBM: A Highly Efficient Gradient Boosting Decision Tree</h1>
+        <h1 id="greedy-function-approximation-a-gradient-boosting-machine">Greedy Function Approximation: A Gradient Boosting Machine</h1>
 <h2 id="abstract">Abstract</h2>
-<p>GBDT的几个更加高效的版本XGBOOST和pGBRT，它们共同的缺点是需要扫描所有的样本来评估所有可能的分割点的信息收益，这是相当的耗时。为了解决上述问题，本文提出了Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB)两个新的技术。其中利用GOSS减少具有小梯度的样本数据的显著性比例，而仅使用剩余数据来估计信息增益。利用EFB，我们将互斥特征（即它们很少同时采用非零值）捆绑在一起，以减少特征数量；但是找到互斥特征的最优捆绑是NP-hard问题，本文采用贪心算法能够得到相当好的近似。在多个公开数据集上实验，LightGBM比一般的GBDT算法快了20倍并且近乎相同的准确率。</p>
-<h2 id="intrduction">1. Intrduction</h2>
-<ul>
-<li>信息熵的定义：对随机变量不确定性的度量 <span class="math display">\[
-H(X) = -\sum _iP(x_i)log_2P(x_i)
-\]</span> Introduction部分基本就是对abstract部分展开描述了，我们称包含GOSS和EFB的GBDT算法为lightGBM。</li>
-</ul>
-<h2 id="preliminaries">2. Preliminaries</h2>
-<h4 id="gbdt和复杂度分析">2.1 GBDT和复杂度分析</h4>
-<p>简单回顾一下一般的GBDT，参考Friedman的paper《Greedy Function Approximation: A Gradient Boosting Machine》</p>
-<p>对于GBDT的主要花费在学习决策树上，在学习决策树的时间主要花费在找到最好的分割点。因为histogram-based算法在内存开销和训练速度上都是更有效的，本文在这个基础上工作。正如算法1展示，histogram-based算法基于特征直方图找到最好的分割点。在构建直方图的时间花费是<span class="math inline">\(O(\#data \times \#feature)\)</span> 而寻找分割点的时间花费是<span class="math inline">\(O(\#bin \times \#feature)\)</span>。因为#bin通常比#data更小，因此直方图的构建占了主要的时间复杂度。如果我们可以减少#data和#feature，我们将基本上可以加速GBDT的训练。</p>
-<h4 id="相关工作">2.2 相关工作</h4>
-<p>有许多GBDT的相关实现，包括XGBoost、pGBRT、scikit-learn和R中的gbm。XGBoost表现优于其他的工具，本文我们把XGBoost作为baseline。</p>
-<h2 id="gradient-based-one-side-sampling">3. Gradient-based One-Side Sampling</h2>
-<p>In this section, we propose a novel sampling method for GBDT that can achieve a good balance <strong>between reducing the number of data instances and keeping the accuracy for learned decision trees.</strong></p>
-<h3 id="algorithm-description">3.1 Algorithm Description</h3>
-<p>AdaBoost算法对于每一个样本数据都有一个重要性指标，但是这里无法获得。另一种思路是丢弃小梯度相关的样本，但是这样会对降低模型的准确率。GOSS方法保留所有大梯度样本数据并且对小梯度样本数据进行随机采样。具体的，GOSS首先通过样本数据的梯度绝对值进行排序并选择top a * 100%的样本。然后从剩余数据选择b * 100%的样本。同时在计算信息增益的时候GOSS扩大小梯度样本数据通过一个常数<span class="math inline">\(\frac{1-a}{b}\)</span>，这样可以不改变原始数据分布太多。</p>
-<center>
-<img src="/2020/09/23/LGBM/4.1.jpg">
-</center>
-<h3 id="theoretical-analysis">3.2 Theoretical Analysis</h3>
-<p>GBDT用决策树来学习一个从输入空间<span class="math inline">\(\chi^s\)</span>到梯度空间<span class="math inline">\(G\)</span>的函数。假设我们有一个包含n个独立同分布的数据集<span class="math inline">\(\{x_1,...,x_n\}\)</span>, 其中每一个<span class="math inline">\(x_i\)</span>是输入空间<span class="math inline">\(\chi^s\)</span>中的一个维度s的向量。在每一轮梯度提升的迭代，对于模型的的损失函数关于输出的<strong>负梯度</strong>记作<span class="math inline">\(\{g_1,...,g_n\}\)</span>。决策树模型在最大信息增益处分割每个点。对于GBDT，通常通过分割后的方差来衡量信息增益，定义如下。</p>
-<h4 id="定义3.1">定义3.1</h4>
-<p>令<span class="math inline">\(O\)</span>为决策树固定节点上的训练数据集。对于该节点分裂特征<span class="math inline">\(j\)</span>在点<span class="math inline">\(d\)</span>处的方差增益定义如下 <span class="math display">\[
-V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^j(d)} + \frac{(\sum_{\{x_i\in O:x_{ij}&gt; d\}}g_i)^2}{n_{r|O}^j(d)})
-\]</span> 其中<span class="math inline">\(n_O=\sum I[x_i\in O]\)</span>，<span class="math inline">\(n^j_{l|O}(d)=\sum I[x_i\in O:x_{ij}\leq d]\)</span> ，<span class="math inline">\(n^j_{r|O}(d)=\sum I[x_i\in O:x_{ij}&gt; d]\)</span></p>
-<p>对于特征<span class="math inline">\(j\)</span>，决策树算法选择<span class="math inline">\(d^*_j=argmax_dV_j(d)\)</span> 并且计算最大增益<span class="math inline">\(V_j(d_j^*)\)</span>。然后，数据在特征<span class="math inline">\(j^*\)</span>的点<span class="math inline">\(d_j^*\)</span>处被分割到左右的子节点。</p>
-<p>在提出的方法GOSS中，首先，根据训练实例的梯度绝对值按降序对其进行排序；其次，保留top百分之a的数据子集A，然后对于剩余<span class="math inline">\((1-a) \times 100\%\)</span>的有更小梯度的数据集<span class="math inline">\(A^c\)</span>，我们随机抽样得到大小<span class="math inline">\(b \times |A^c|\)</span>的数据子集B；最后我们在数据子集<span class="math inline">\(A \cup B\)</span>上通过估计的方差增益<span class="math inline">\(\widetilde V_j(d)\)</span> 分割数据样本，也就是 <span class="math display">\[
-\widetilde V_j(d) = \frac 1 n (\frac{(\sum_{x_i\in A_l}g_i+\frac{1-a}{b}\sum_{x_i\in B_l}g_i)^2}{n_l^j(d)}+\frac{(\sum_{x_i\in A_r}g_i+\frac{1-a}{b}\sum_{x_i\in B_r}g_i)^2}{n_r^j(d)})
-\]</span> 其中<span class="math inline">\(A_l=\{x_i\in A:x_{ij}\leq d\}\)</span>,<span class="math inline">\(A_r=\{x_i\in A:x_{ij}&gt;d\}\)</span>,<span class="math inline">\(B_l=\{x_i\in B:x_{ij}\leq d\}\)</span>,<span class="math inline">\(B_r=\{x_i\in B,x_{ij}&gt;d\}\)</span>,并且系数<span class="math inline">\(\frac{1-a}{b}\)</span>被用来把B上的梯度总和归一化为<span class="math inline">\(A^c\)</span>的大小。</p>
-<p>因此在GOSS，我们用在一个更小的实例子集估计的<span class="math inline">\(\widetilde V_j(d)\)</span>代替在所有实例集合上的精确的<span class="math inline">\(V_j(d)\)</span>去决定分割点，这样操作可以大大缩减计算开销。更重要的，下面的定理证明GOSS不将损失太多的训练准确率并且优于随机的采样。(补充材料给出对应的证明)</p>
-<h4 id="定理3.2">定理3.2</h4>
-<p>我们把GOSS的近似误差记作<span class="math inline">\(\varepsilon(d)=|\widetilde V_j(d) - V_j(d)|\)</span>，以及<span class="math inline">\(\bar g^j_l(d)=\frac{\sum_{x_i\in (A\cup A^c)_l|g_i|}}{n^j_l(d)}\)</span>，<span class="math inline">\(\bar g^r_j(d)=\frac{\sum_{x_i\in (A\cup A^c)_r|g_i|}}{n^j_r(d)}\)</span>。至少<span class="math inline">\(1-\sigma\)</span>的概率，我们有 <span class="math display">\[
-\epsilon (d) \leq C_{a,b}^2ln(\frac 1 \sigma) \dot max\{\frac{1}{n_l^j(d)},\frac{1}{n_r^j(d)}\} +2DC_{a,b}\sqrt{\frac{ln(\frac1 \sigma)}{n}}
-\]</span> 其中<span class="math inline">\(C_{a,b}=\frac{1-a}{\sqrt b}max_{x_i\in A^c}|g_i|\)</span>并且<span class="math inline">\(D=max(\bar g_l^j(d),\bar g_r^j(d))\)</span></p>
-<p>通过这个定理，我们有下面的讨论：(1) GOSS的渐近逼近率是<span class="math inline">\(O(\frac 1{n_l^j(d)}+\frac 1{n_r^j(d)}+\frac 1{\sqrt n})\)</span>,如果分割不是太不平衡（就是<span class="math inline">\(n_l^j(d)\geq O(\sqrt n)\)</span>和<span class="math inline">\(n_r^j(d)\geq O(\sqrt n)\)</span>，这个近似误差主要由上式的第二项决定，随着n趋向于无穷，其降低到0。这意味着随着数据量的增大，近似是相当准确的。（2）随机采样是GOSS当a取0的一个特殊情况。在许多情况下，GOSS都表现优于随机采样。</p>
-<h2 id="exclusive-feature-bunding">4. Exclusive Feature Bunding</h2>
-<p>In this section, we propose a novel method to effectively reduce the number of features.</p>
-<p>高维数据通常是稀疏的，特征空间的系数性为我们设计一种几乎无损的方法来减少特征数量提供可能性。特别地，在一个稀疏的特征空间，许多特征是互斥的，也就是它们从不会同时取得0值。我们能够把互斥特征捆绑成为一个单独的特征（称为EFB）。通过特征扫描算法，我们可以从特征bundle构建与单个特征相同的特征直方图。在这种方式，直方图构建的复杂度从<span class="math inline">\(O(\#data \times \#feature)\)</span>降低到<span class="math inline">\(O(\#data \times \#bundle)\)</span>但是<span class="math inline">\(\#bundle &lt;&lt; \#feature\)</span> 。然后，我们可以大大加快GBDT的训练速度，而不会影响准确性。在下文中，我们将详细展示如何实现这一目标。</p>
-<p>There are two issues to be addressed. The first one is to <strong>determine which features should be bundled together.</strong> The second is <strong>how to construct the bundle</strong>.</p>
-<center>
-<img src="/2020/09/23/LGBM/4.2.jpg">
-</center>
-<h4 id="定理4.1">定理4.1</h4>
-<p>The problem of partitioning features into a smallest number of exclusive bundles is NP-hard.</p>
-<p>证明略</p>
-<p>对于第一个问题（哪些特征捆绑在一起），定理4.1表明找到最有捆绑策略是NP-hard，因此无法在多项式时间内找到最优解。为了找到一个近似解，我们把EFB转化为图着色问题来求解，把所有特征视作顶点并且对不是相互独立的特征增加一条边，那么我们可以通过贪心算法找到一个最优解。更多地，我们注意到许多特征并不是100%相互独立，但是也很少同时具有非0的值。如果算法允许一个小的冲突，我们能够得到更小的特征捆绑来提高计算效率。经过简单计算，随机污染小部分特征值对精度的最大是<span class="math inline">\(O([(1-\gamma)n]^{(-2/3)})\)</span>其中<span class="math inline">\(\gamma\)</span>是冲突率，因此我们固定一个较小的冲突率，可以实现精确率和效率的平衡。</p>
-<p>基于上述讨论，我们设计了EFB算法。首先，我们构造一个带权重的边，权重对应特征之间的总冲突数量。其次，按照特征的度对特征降序排列。最后，我们在有序列表的每一个特征，或者放入已经存在的bundle（带有冲突率），或者产生一个新的bundle。该算法的时间复杂度是<span class="math inline">\(O(\#feature^2)\)</span>并且在训练之前仅处理一次。这个时间复杂度在特征数量不是足够大的时候是可以接受的，当特征数量几百万的时候，我们根据特征的非0数量的排序代替现有的排序算法。</p>
-<p>对于第二个问题（如何捆绑特征到一起），我们需要一个好的方法捆绑特征以减少对应的训练复杂度。关键是可以在bundle中识别原始特征。因为histogram-based算法存储离散的bins代替特征的连续值，我们可以构造一个特征bundle通过在不同的bins加入单独的特征偏置。这个可以通过在特征的原始值上增加offset来实现。例如，假设在特征bundle中有两个特征，特征A的取值来自<span class="math inline">\([0,10)\)</span>，特征B取值来自<span class="math inline">\([0,20)\)</span>.我们把特征B从加10，重新定义特征B的取值来自<span class="math inline">\([10,30)\)</span>。这样通过一个取值自<span class="math inline">\([0,30]\)</span>的特征bundle代替原始的特征A和B。</p>
-<h2 id="experiments">5. Experiments</h2>
-<h2 id="conclusion">6. Conclusion</h2>
-<p>In this paper, we have proposed a novel GBDT algorithm called LightGBM, which contains two novel techniques: <strong>Gradient-based One-Side Sampling and Exclusive Feature Bundling</strong> to deal with large number of data instances and large number of features respectively.</p>
-
+<p>函数估计/近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用multi-class logistic likelihood。</p>
+<p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
+        
+          <a class="article-more-a" href="/2020/09/23/GBM/#more">more >></a>
+        
       
 
       
@@ -261,7 +213,7 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/23/LGBM/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/23/GBM/">展开全文 >></a>
         </p>
       
 
@@ -291,19 +243,19 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 
 
   
-    <article id="post-GBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LGBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/23/GBM/">GBM</a>
+      <a class="article-title" href="/2020/09/23/LGBM/">GBM</a>
     </h1>
   
 
         
-        <a href="/2020/09/23/GBM/" class="archive-article-date">
+        <a href="/2020/09/23/LGBM/" class="archive-article-date">
   	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
 </a>
         
@@ -311,87 +263,12 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="greedy-function-approximation-a-gradient-boosting-machine">Greedy Function Approximation: A Gradient Boosting Machine</h1>
+        <h1 id="lightgbm-a-highly-efficient-gradient-boosting-decision-tree">LightGBM: A Highly Efficient Gradient Boosting Decision Tree</h1>
 <h2 id="abstract">Abstract</h2>
-<p>函数估计/近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用multi-class logistic likelihood。</p>
-<p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
-<h2 id="function-estimation">1. Function estimation</h2>
-<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合$ x = {x_1,...,x_n}<span class="math inline">\(组成的一套系统进行分析。通过一组训练样本\)</span>{y_i, x_i}^N_1<span class="math inline">\(，目标是得到一个估计\)</span>F(x)<span class="math inline">\(，那也就是最小化定义在\)</span>(y, x)<span class="math inline">\(上的某个具体的损失函数\)</span>L(y,F( x))$的期望值， <span class="math display">\[
-F^* = \mathop{\arg\min}_{F}E_{y, x}L(y,F( x)) = \mathop{\arg\min}_{F}E_{ x}[E_y(L(y,F( x)))| x]
-\]</span> 通常损失函数<span class="math inline">\(L(y,F)\)</span>选择平方损失<span class="math inline">\((y-F)^2\)</span>和绝对损失<span class="math inline">\(|y-F|\)</span>（回归）, 当<span class="math inline">\(y\in\{-1,1\}\)</span>的分类问题选择negative binomial log-likelihood <span class="math inline">\(log(1+e^{-2yF})\)</span>。本文我们聚焦在加法扩展形式， <span class="math display">\[
-F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
-\]</span></p>
-<h3 id="numerical-optimization">1.1 Numerical optimization</h3>
-<p>一般地，选择一个参数模型<span class="math inline">\(F( x;P)\)</span>, 把funtion optimization 转化为 parameter optimization <span class="math display">\[
- P^* = \mathop{\arg\min}_{ P}\Phi( P)
-\]</span> 其中<span class="math inline">\(\Phi(P) = E_{y, x}L(y,F( x;P))\)</span>, 得到<span class="math inline">\(F^*( x) = F( x;P^*)\)</span>,这里参数的解表示成以下形式 <span class="math display">\[
- P^* = \sum^M_{m=0} P_m
-\]</span> 其中<span class="math inline">\(P_0\)</span>是一个初始值，<span class="math inline">\(\{ p_m\}^M_1\)</span>是连续的increments(steps or boosts)。</p>
-<h3 id="steepest-descent">1.2 Steepest-descent</h3>
-<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{ p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(\bold g_m\)</span>计算如下， <span class="math display">\[
- g_m = \{g_{jm}\} = \{[\frac{\partial \Phi( P)}{\partial P_j}]_{ P= P_{m-1}}\}
-\]</span> 其中$ P_{m-1} = _{i=0}^{m-1} p_i$, 这一步计算得到 <span class="math display">\[
-\bold p_m = -\rho_m\bold g_m
-\]</span> 其中 <span class="math display">\[
-\rho_m = \mathop{\arg\min}_{\rho}\Phi( P_{m-1}-\rho  g_m)
-\]</span> 其中负梯度<span class="math inline">\(- g_m\)</span>被定义为“steeepest-descent”方向并且上式称为沿着这个方向的“line search”。</p>
-<h2 id="numerical-optimization-in-function-space">2. Numerical optimization in function space</h2>
-<p>这里我们采用一个“非参数”的方法并且在参数空间应用数值优化。我们考虑<span class="math inline">\(F( x)\)</span>在每一个点$ x$是一个参数并且取最小化(现实空间中函数的点具有无限个，这里相当于用有限个点表示函数并且把有限个点的函数值作为参数) <span class="math display">\[
-\Phi(F) = E_{y, x}L(y,F( x)) = E_{ x}[E_y(L(y,F( x)))| x]
-\]</span> 或者等价于最小化 <span class="math display">\[
-\phi (F( x)) = E_y[L(y,F( x))| x]
-\]</span> 在每一个<span class="math inline">\(\bold x\)</span>点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的<span class="math inline">\(\{F(x_i)\}^N_1\)</span>。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
-F^*( x) = \sum^M_{m=0}f_m( x)
-\]</span> 其中<span class="math inline">\(f_0( x)\)</span>是一个初始值，<span class="math inline">\(\{f_m( x)\}^M_1\)</span>是连续的incremental functions (steps or boosts)。</p>
-<p>对于steepest-descent <span class="math display">\[
-f_m( x) = -\rho_mg_m( x)
-\]</span> 其中 <span class="math display">\[
-g_m( x) = [\frac{\partial \phi(F( x))}{\partial F( x)}]_{F( x) = F_{m-1}( x)} = [\frac{\partial E_y[L(y,F( x))| x]}{\partial F( x)}]_{F(x) = F_{m-1}( x)}
-\]</span></p>
-<p><span class="math display">\[
-F_{m-1}( x) = \sum^{m-1}_{i=0}f_i( x)
-\]</span></p>
-<p>假设充分的经验表明微分的可交换性， <span class="math display">\[
-g_m( x) = E_y[\frac{\partial \phi(F( x))}{\partial F( x)}| x]_{F( x) = F_{m-1}( x)}
-\]</span> 其中乘子<span class="math inline">\(\rho_m\)</span>被线性搜索给出 <span class="math display">\[
-\rho_m = \mathop{\arg\min}_{\rho}E_{y, x}L(y,F_{m-1}( x)-\rho g_m( x))
-\]</span></p>
-<h2 id="finite-data">3. Finite data</h2>
-<p>当非参数空间中联合分布<span class="math inline">\((y, x)\)</span>在有限的数据集<span class="math inline">\(\{y_i, x_i\}_1^N\)</span>上面估计的时候会失效。因此尝试“greedy-stagewise”方法，优化下面的期望损失 <span class="math display">\[
-&lt;center&gt;![](LGBM/4.2.jpg)&lt;/center&gt;
-\]</span> 对于<span class="math inline">\(1,2,...,M\)</span>， <span class="math display">\[
-(\beta_m, a_m) = \mathop{\arg\min}_{\{\beta, a\}}\sum^N_{i=1}L(y_i,F_{m-1}(x_i)+\beta h( x_i;a))
-\]</span> 得到 <span class="math display">\[
-F_m( x) = F_{m-1}( x) + \beta_mh( x; a_m)
-\]</span> 总结stagewise策略思想是针对负梯度 <span class="math display">\[
--g_m( x) = -[\frac{\partial L(y_i,F( x_i))}{\partial F(x_i)}]_{F( x) = F_{m-1}( x)}
-\]</span> 通过优化参数<span class="math inline">\(\bold a_m\)</span>使得<span class="math inline">\(h( x; a)\)</span>和<span class="math inline">\(-g_m(x)\)</span>在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
- a_m =\mathop{\arg\min}_{ a,\beta}\sum_{i=1}^N[-g_m( x_i)-\beta h( x_i; a)]^2
-\]</span> <span class="math inline">\(\rho_m\)</span>通过线性搜索的到 <span class="math display">\[
-\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^NL(y_i,F_{m-1}( x_i)+\rho h( x_i; a_m))
-\]</span> 的到如下的近似更新,称<span class="math inline">\(h(x;a)\)</span>为base learner。 <span class="math display">\[
-F_m( x) = F_{m-1}( x) + \rho_mh( x; a_m)
-\]</span></p>
-<h4 id="algorithm1-gradient_boost">Algorithm1 : Gradient_Boost</h4>
-<center>
-<img src="/2020/09/23/GBM/3.1.jpg">
-</center>
-<h2 id="applications-additive-modeling">Applications : additive modeling</h2>
-<h3 id="least-squares-regression">4.1 Least-squares regression</h3>
-<p>这里<span class="math inline">\(L(y,F) = (y - F)^2/2\)</span>. 对于算法1中<span class="math inline">\(\hat y_i = y_i - F_{m-1}(\ x_i)\)</span>。因此算法1的第四行拟合当前的残差并且line search得到<span class="math inline">\(\rho_m = \beta_m\)</span>。</p>
-<h4 id="algorithm2-ls_boost">Algorithm2: LS_Boost</h4>
-<center>
-<img src="/2020/09/23/GBM/3.2.jpg">
-</center>
-<h3 id="least-absolute-deviation-lad-regression">4.2 Least-absolute-deviation (LAD) regression</h3>
-<p>这里损失函数<span class="math inline">\(L(y,F) = |y-F|\)</span>, 对于算法1中 <span class="math display">\[
-\hat y_i=-[\frac{\partial L(y_i,F( x_i))}{\partial F( x_i)}]_{F( x)=F_{m-1}( x)} = sign(y_i-F_{m-1}( x))
-\]</span> 算法1中的第五行变为 <span class="math display">\[
-\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^N|y_i-F_{m-1}( x_i)-\rho h( x_i; a_m)|\\
-=\mathop{\arg\min}_{\rho}\sum_{i=1}^N|h( x_i; a_m)||\frac{y_I-F_{m-1}( x_i)}{h(x_i; a_m)}-\rho|\\
-=median_W\{\frac{y_I-F_{m-1}( x_i)}{h( x_i; a_m)}\}_1^N ,\omega_i=|h( x_i; a_m)|
-\]</span> 其中<span class="math inline">\(median_W{.}\)</span>是权重<span class="math inline">\(\omega_i\)</span>的加权中位数。</p>
-
+<p>GBDT的几个更加高效的版本XGBOOST和pGBRT，它们共同的缺点是需要扫描所有的样本来评估所有可能的分割点的信息收益，这是相当的耗时。为了解决上述问题，本文提出了Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB)两个新的技术。其中利用GOSS减少具有小梯度的样本数据的显著性比例，而仅使用剩余数据来估计信息增益。利用EFB，我们将互斥特征（即它们很少同时采用非零值）捆绑在一起，以减少特征数量；但是找到互斥特征的最优捆绑是NP-hard问题，本文采用贪心算法能够得到相当好的近似。在多个公开数据集上实验，LightGBM比一般的GBDT算法快了20倍并且近乎相同的准确率。</p>
+        
+          <a class="article-more-a" href="/2020/09/23/LGBM/#more">more >></a>
+        
       
 
       
@@ -414,7 +291,7 @@ F_m( x) = F_{m-1}( x) + \rho_mh( x; a_m)
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/23/GBM/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/23/LGBM/">展开全文 >></a>
         </p>
       
 
@@ -745,13 +622,9 @@ r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
         <h1 id="pagerank">PageRank</h1>
 <h2 id="pagerank基本定义">PageRank基本定义</h2>
 <p>​ 给定一个包含n个结点<span class="math inline">\(v_1,v_2,...,v_n\)</span>的强连通且非周期性的有向图，在有向图上定义随机游走模型（一阶Markov链）。随机游走的特点是从一个结点到有有向边连出的所有结点的转移概率相等，转移矩阵为M，这个Markov链具有平稳分布R（ <span class="math inline">\(MR=R\)</span>），平稳分布R成为这个有向图的PageRank。R的各个分量称为各个结点的PageRank值。</p>
-<h2 id="pagerank一般定义">PageRank一般定义</h2>
-<p>​ 给定一个含有n个结点的任意有向图，在有向图上定义一个一般的随机游走模型。一般的随机游走模型有两部分组成，一部分是有向图的基本转移矩阵M，表示从一个结点到其连出的所有结点的转移概率相等，另一部分是完全随机的转移矩阵，表示从任意一个结点到任意一个结点的转移概率都是1/n，线性组合系数为阻尼因子<span class="math inline">\(d(0&lt;=d&lt;=1)\)</span>。这个一般随机游走的Markov链存在平稳分布，记作R。定义平稳分布向量R为这个有向图的一般PageRank。R由公式 <span class="math display">\[
-R = dMR+\frac{1-d}n1
-\]</span> 决定，其中1是所有分量为1的n维向量。</p>
-<h2 id="pagerank的计算">PageRank的计算</h2>
-<p>计算方法包括迭代算法、幂法、代数算法</p>
-
+        
+          <a class="article-more-a" href="/2020/09/05/PageRank/#more">more >></a>
+        
       
 
       
@@ -1407,19 +1280,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图谱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
               </li>
              
               <li class="article-tag-list-item">

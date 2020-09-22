@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/09/23/LGBM/4.1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/23/LGBM/4.2.jpg">
 <meta property="article:published_time" content="2020-09-22T16:16:09.000Z">
-<meta property="article:modified_time" content="2020-09-22T16:58:47.178Z">
+<meta property="article:modified_time" content="2020-09-22T17:00:43.777Z">
 <meta property="article:author" content="cyq">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/09/23/LGBM/4.1.jpg">
@@ -190,6 +190,7 @@
         <h1 id="lightgbm-a-highly-efficient-gradient-boosting-decision-tree">LightGBM: A Highly Efficient Gradient Boosting Decision Tree</h1>
 <h2 id="abstract">Abstract</h2>
 <p>GBDT的几个更加高效的版本XGBOOST和pGBRT，它们共同的缺点是需要扫描所有的样本来评估所有可能的分割点的信息收益，这是相当的耗时。为了解决上述问题，本文提出了Gradient-based One-Side Sampling (GOSS) and Exclusive Feature Bundling (EFB)两个新的技术。其中利用GOSS减少具有小梯度的样本数据的显著性比例，而仅使用剩余数据来估计信息增益。利用EFB，我们将互斥特征（即它们很少同时采用非零值）捆绑在一起，以减少特征数量；但是找到互斥特征的最优捆绑是NP-hard问题，本文采用贪心算法能够得到相当好的近似。在多个公开数据集上实验，LightGBM比一般的GBDT算法快了20倍并且近乎相同的准确率。</p>
+<a id="more"></a>
 <h2 id="intrduction">1. Intrduction</h2>
 <ul>
 <li>信息熵的定义：对随机变量不确定性的度量 <span class="math display">\[
@@ -345,9 +346,18 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
   
 <nav id="article-nav">
   
+    <a href="/2020/09/23/GBM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          GBM
+        
+      </div>
+    </a>
   
-    <a href="/2020/09/23/GBM/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">GBM</div>
+  
+    <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">时间序列</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -494,19 +504,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">异常</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+                <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">图谱</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
               </li>
              
               <li class="article-tag-list-item">
