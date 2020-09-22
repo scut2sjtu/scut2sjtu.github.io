@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/09/23/GBM/3.1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/23/GBM/3.2.jpg">
 <meta property="article:published_time" content="2020-09-22T16:16:09.000Z">
-<meta property="article:modified_time" content="2020-09-22T17:00:53.664Z">
+<meta property="article:modified_time" content="2020-09-22T17:06:56.738Z">
 <meta property="article:author" content="cyq">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/09/23/GBM/3.1.jpg">
@@ -193,7 +193,7 @@
 <p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
 <a id="more"></a>
 <h2 id="function-estimation">1. Function estimation</h2>
-<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合$ x = {x_1,...,x_n}<span class="math inline">\(组成的一套系统进行分析。通过一组训练样本\)</span>{y_i, x_i}^N_1<span class="math inline">\(，目标是得到一个估计\)</span>F(x)<span class="math inline">\(，那也就是最小化定义在\)</span>(y, x)<span class="math inline">\(上的某个具体的损失函数\)</span>L(y,F( x))$的期望值， <span class="math display">\[
+<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合 $ x = {x_1,...,x_n}<span class="math inline">\(组成的一套系统进行分析。通过一组训练样本\)</span>{y_i, x_i}^N_1<span class="math inline">\(，目标是得到一个估计\)</span>F(x)<span class="math inline">\(，主要是最小化定义在\)</span>(y, x)<span class="math inline">\(上的某个具体的损失函数\)</span>L(y,F( x))$的期望值 <span class="math display">\[
 F^* = \mathop{\arg\min}_{F}E_{y, x}L(y,F( x)) = \mathop{\arg\min}_{F}E_{ x}[E_y(L(y,F( x)))| x]
 \]</span> 通常损失函数<span class="math inline">\(L(y,F)\)</span>选择平方损失<span class="math inline">\((y-F)^2\)</span>和绝对损失<span class="math inline">\(|y-F|\)</span>（回归）, 当<span class="math inline">\(y\in\{-1,1\}\)</span>的分类问题选择negative binomial log-likelihood <span class="math inline">\(log(1+e^{-2yF})\)</span>。本文我们聚焦在加法扩展形式， <span class="math display">\[
 F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
@@ -205,10 +205,10 @@ F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
  P^* = \sum^M_{m=0} P_m
 \]</span> 其中<span class="math inline">\(P_0\)</span>是一个初始值，<span class="math inline">\(\{ p_m\}^M_1\)</span>是连续的increments(steps or boosts)。</p>
 <h3 id="steepest-descent">1.2 Steepest-descent</h3>
-<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{ p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(\bold g_m\)</span>计算如下， <span class="math display">\[
+<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{ p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(g_m\)</span>计算如下， <span class="math display">\[
  g_m = \{g_{jm}\} = \{[\frac{\partial \Phi( P)}{\partial P_j}]_{ P= P_{m-1}}\}
 \]</span> 其中$ P_{m-1} = _{i=0}^{m-1} p_i$, 这一步计算得到 <span class="math display">\[
-\bold p_m = -\rho_m\bold g_m
+ p_m = -\rho_m g_m
 \]</span> 其中 <span class="math display">\[
 \rho_m = \mathop{\arg\min}_{\rho}\Phi( P_{m-1}-\rho  g_m)
 \]</span> 其中负梯度<span class="math inline">\(- g_m\)</span>被定义为“steeepest-descent”方向并且上式称为沿着这个方向的“line search”。</p>
@@ -217,7 +217,7 @@ F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
 \Phi(F) = E_{y, x}L(y,F( x)) = E_{ x}[E_y(L(y,F( x)))| x]
 \]</span> 或者等价于最小化 <span class="math display">\[
 \phi (F( x)) = E_y[L(y,F( x))| x]
-\]</span> 在每一个<span class="math inline">\(\bold x\)</span>点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的<span class="math inline">\(\{F(x_i)\}^N_1\)</span>。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
+\]</span> 在每一个$ x<span class="math inline">\(点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的\)</span>{F(x_i)}^N_1$。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
 F^*( x) = \sum^M_{m=0}f_m( x)
 \]</span> 其中<span class="math inline">\(f_0( x)\)</span>是一个初始值，<span class="math inline">\(\{f_m( x)\}^M_1\)</span>是连续的incremental functions (steps or boosts)。</p>
 <p>对于steepest-descent <span class="math display">\[
@@ -235,7 +235,7 @@ g_m( x) = E_y[\frac{\partial \phi(F( x))}{\partial F( x)}| x]_{F( x) = F_{m-1}( 
 \]</span></p>
 <h2 id="finite-data">3. Finite data</h2>
 <p>当非参数空间中联合分布<span class="math inline">\((y, x)\)</span>在有限的数据集<span class="math inline">\(\{y_i, x_i\}_1^N\)</span>上面估计的时候会失效。因此尝试“greedy-stagewise”方法，优化下面的期望损失 <span class="math display">\[
-&lt;center&gt;![](LGBM/4.2.jpg)&lt;/center&gt;
+\{\beta_m, a_m\}^M_1 = \mathop{\arg\min}_{\{\beta^{&#39;}_m,a_m^{&#39;}\}}\sum^N_{i=1}L(y_i,\sum ^M_{m=1}\beta^{&#39;}_mh( x_i; a_m^{&#39;}))
 \]</span> 对于<span class="math inline">\(1,2,...,M\)</span>， <span class="math display">\[
 (\beta_m, a_m) = \mathop{\arg\min}_{\{\beta, a\}}\sum^N_{i=1}L(y_i,F_{m-1}(x_i)+\beta h( x_i;a))
 \]</span> 得到 <span class="math display">\[
@@ -525,6 +525,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">time-series</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
@@ -533,15 +541,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">统计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">time-series</a>
               </li>
              
               <li class="article-tag-list-item">

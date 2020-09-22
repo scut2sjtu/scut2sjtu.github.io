@@ -321,19 +321,19 @@
 
 
   
-    <article id="post-时间序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-TS1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">时间序列</a>
+      <a class="article-title" href="/2020/09/11/TS1/">时间序列</a>
     </h1>
   
 
         
-        <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" class="archive-article-date">
+        <a href="/2020/09/11/TS1/" class="archive-article-date">
   	<time datetime="2020-09-10T16:08:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-11</time>
 </a>
         
@@ -351,57 +351,9 @@ y_t = \frac{x_t+(1-\alpha)x_{t-1}+(1-\alpha)^2x_{t-2}+...+(1-\alpha)^tx_0}{1+(1-
 y_0 = x_0 \\
 y_t = (1-\alpha)y_{t-1} + \alpha x_t
 \]</span></p>
-<h2 id="时间序列的自相关和偏自相关">时间序列的自相关和偏自相关</h2>
-<ul>
-<li>自相关系数</li>
-</ul>
-<p>一般针对不同时间区间的同一时间序列进行计算，公式如下 <span class="math display">\[
-\rho_l = \frac{Cov(X_k,X_{k-l})}{Var(X_k)} = \frac {\gamma_l}{\gamma_0}
-\]</span></p>
-<ul>
-<li>偏自相关系数</li>
-</ul>
-<p>计算较为繁琐，暂忽略</p>
-<h2 id="时间序列的平稳性">时间序列的平稳性</h2>
-<p>平稳性分为弱平稳和强平稳，一般弱平稳应用较为广泛。时间序列标记为<span class="math inline">\(\{X_t\}\)</span>，平稳的时间序列的性质不随观测时间的变化而变化，因此具有趋势或季节性的时间序列不是平稳时间序列。</p>
-<ul>
-<li><p>强平稳</p>
-<p>对于<span class="math inline">\(k\in Z\)</span>,<span class="math inline">\((X_1,X_2,...,X_n)^T和(X_{1+k},X_{2+k},...,X_{n+k})^T\)</span>是同分布的</p></li>
-<li><p>弱平稳</p></li>
-</ul>
-<p><span class="math inline">\({\forall}t\in N,EX_t^2&lt;+\infty\)</span></p>
-<p><span class="math inline">\({\forall}t\in N,EX_t^2=\mu\)</span> 时间序列任意时刻的随机变量的期望值恒定</p>
-<p><span class="math inline">\({\forall}t,s\in N,E[(X_t-\mu)(X_s-\mu)]=\gamma_{t-s}\)</span> 时间序列的任意两个时刻的随机变量的协方差只与时间间隔间隔有关</p>
-<ul>
-<li><p>单位根检验：判断序列是否平稳，常见的单位根检验方法有ADF检验、PP检验</p>
-<p>Augmented Dickey-Fuller test可以测试一个自回归模型是否存在单位根（unit root）</p></li>
-</ul>
-<h2 id="时间序列的预测方法">时间序列的预测方法</h2>
-<p>传统的预测方法有上面介绍的指数滑动平均法，还有时间序列常用的AR，MA，ARMA等模型</p>
-<ul>
-<li>AR模型</li>
-</ul>
-<p>具有如下结构的是p阶自回归模型(auto regression)，记为AR(p)。 <span class="math display">\[
-X_t = \phi _0 + \phi _1X_{t-1} + \phi _2 X_{t-2} + ... + \phi _p X_{t-p} + \epsilon _t
-\]</span> 其中随机变量<span class="math inline">\(X_t\)</span>是前p个随机变量的多元线性回归，误差项为白噪声<span class="math inline">\(\epsilon_t\)</span>。</p>
-<ul>
-<li>MA模型</li>
-</ul>
-<p>具有如下结构的是q阶滑动平均模型(moving average)，记为MA(q) <span class="math display">\[
-X_t = \mu + \epsilon _t - \theta_1\epsilon_{t-1}-\theta_2\epsilon_{t-2}-...-\theta_q\epsilon_{t-q}
-\]</span> 其中随机变量<span class="math inline">\(X_t\)</span>是前q个随机扰动的的多元线性回归，误差项为白噪声<span class="math inline">\(\epsilon_t\)</span>。</p>
-<ul>
-<li>ARMA模型</li>
-</ul>
-<p>ARMA(p,q)模型是最常用的平稳序列拟合模型，随机变量<span class="math inline">\(X_t\)</span>的取值不仅与之前p个的序列值有关还与前q个随机扰动有关。 <span class="math display">\[
-X_t = \phi _0 + \phi _1X_{t-1} + \phi _2 X_{t-2} + ... + \phi _p X_{t-p} + \epsilon _t- \theta_1\epsilon_{t-1}-\theta_2\epsilon_{t-2}-...-\theta_q\epsilon_{t-q}
-\]</span> 这个是最常用的预测模型，一般步骤如下：</p>
-<ol type="1">
-<li>对时间序列数据进行平稳性检验，如果不平稳可进行查分后检验；</li>
-<li>对平稳序列进行定阶，估计p和q；</li>
-<li>用ARMA(p,q)模型预测<span class="math inline">\(X_{t+1}\)</span></li>
-</ol>
-
+        
+          <a class="article-more-a" href="/2020/09/11/TS1/#more">more >></a>
+        
       
 
       
@@ -435,7 +387,7 @@ X_t = \phi _0 + \phi _1X_{t-1} + \phi _2 X_{t-2} + ... + \phi _p X_{t-p} + \epsi
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/11/TS1/">展开全文 >></a>
         </p>
       
 
@@ -495,47 +447,9 @@ r = \frac{Conv(X,Y)}{Var(X)Var(Y)}
 \]</span> 假设检验用到的t-检验统计量 <span class="math display">\[
 t = \frac{|r|}{\sqrt\frac{1-r^2}{n-2}} \sim t(n-2)
 \]</span></p>
-<h3 id="spearman相关系数">spearman相关系数</h3>
-<p>斯皮尔曼相关系数被定义为等级变量的皮尔逊相关系数，针对秩次的线性相关性分析，计算公式如下 <span class="math display">\[
-\rho = 1-\frac{6\sum d^2_i}{n(n^2-1)},d_i = x_i - y_i
-\]</span></p>
-<h3 id="分类型变量的相关性分析-kendall相关系数">分类型变量的相关性分析-kendall相关系数</h3>
-<p><span class="math display">\[
-\tau = \frac{(number\ of\ concordant\ pairs)-(number\ of\ discordant\ pairs)}{\frac1 2 n(n-1)}
-\]</span></p>
-<h3 id="连续型变量和二元分类变量的相关性分析-point-biserial相关系数">连续型变量和二元分类变量的相关性分析-Point-Biserial相关系数</h3>
-<p><span class="math display">\[
-r_{pb}=\frac{M_1-M_0}{s_n}\sqrt {pq}
-\]</span></p>
-<p>其中</p>
-<p>$ M_1$表示二元变量“1”对应的连续变量的均值</p>
-<p><span class="math inline">\(M_0\)</span> 表示二元变量“0”对应的连续变量的均值</p>
-<p><span class="math inline">\(S_n\)</span>表示连续变量的标准偏差</p>
-<p><span class="math inline">\(p\)</span> 表示二元变量“1”对象占总对象的比例</p>
-<p><span class="math inline">\(q\)</span> 表示二元变量“0”对象占总对象的比例</p>
-<h3 id="偏相关性分析">偏相关性分析</h3>
-<p>Partial correlation is a method used to describe the relationship between two variables <strong>whilst taking away the effects of another variable</strong>, or several other variables, on this relationship.</p>
-<p>Consider a correlation matrix for variables A, B and C <span class="math display">\[
-\begin{equation}       %开始数学环境
-\left(                 %左括号
-  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
-    * &amp; * &amp; *\\  %第一行元素
-    r_{AB} &amp; * &amp; *\\  %第二行元素
-    r_{AC} &amp; r_{BC} &amp; *
-  \end{array}
-\right)                 %右括号
-\end{equation}
-\]</span> The partial correlation of A and B adjusted for C is: <span class="math display">\[
-r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
-\]</span></p>
-<h3 id="卡方检验">卡方检验</h3>
-<p>一种非参数检验，不存在具体参数和总体分布的假设检验。</p>
-<h4 id="卡方拟合优度检验">卡方拟合优度检验</h4>
-<p><span class="math display">\[
-\chi ^2 = \sum \frac{(f_o-f_e)^2}{f_e}
-\]</span></p>
-<p>其中<span class="math inline">\(f_o\)</span>表示观测频数，<span class="math inline">\(f_e\)</span>表示期望频数。</p>
-
+        
+          <a class="article-more-a" href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/#more">more >></a>
+        
       
 
       
@@ -1284,6 +1198,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">time-series</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">异常</a>
               </li>
              
@@ -1292,15 +1214,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">统计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">time-series</a>
               </li>
              
               <li class="article-tag-list-item">
