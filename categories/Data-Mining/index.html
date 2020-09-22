@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>相关关系 | quotecao</title>
+  <title>Category: Data Mining | quotecao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="变量的相关性分析 关系的定义 变量之间关系分为确定性关系，即函数关系和不确定性关系，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。 相关分析 连续型变量的线性相关分析 采用Pearson相关系数\(r\)进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数\(r\)进行假设检验，构造样本相关系数的t-检验统计量。 \">
-<meta property="og:type" content="article">
-<meta property="og:title" content="相关关系">
-<meta property="og:url" content="http://yoursite.com/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/index.html">
+  <meta name="description" content="notes">
+<meta property="og:type" content="website">
+<meta property="og:title" content="quotecao">
+<meta property="og:url" content="http://yoursite.com/categories/Data-Mining/index.html">
 <meta property="og:site_name" content="quotecao">
-<meta property="og:description" content="变量的相关性分析 关系的定义 变量之间关系分为确定性关系，即函数关系和不确定性关系，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。 相关分析 连续型变量的线性相关分析 采用Pearson相关系数\(r\)进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数\(r\)进行假设检验，构造样本相关系数的t-检验统计量。 \">
+<meta property="og:description" content="notes">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-09T04:54:00.000Z">
-<meta property="article:modified_time" content="2020-09-10T16:09:17.201Z">
 <meta property="article:author" content="cyq">
-<meta property="article:tag" content="相关性">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="quotecao" type="application/atom+xml">
@@ -165,236 +162,98 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-连续性变量的相关性分析" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      相关关系
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/" class="archive-article-date">
+  	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/">GBM</a>
     </h1>
   
 
-        
-        <a href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-09-09T04:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="变量的相关性分析">变量的相关性分析</h1>
-<h2 id="关系的定义">关系的定义</h2>
-<p>变量之间关系分为<strong>确定性关系</strong>，即函数关系和<strong>不确定性关系</strong>，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。</p>
-<h2 id="相关分析">相关分析</h2>
-<h3 id="连续型变量的线性相关分析">连续型变量的线性相关分析</h3>
-<p>采用Pearson相关系数<span class="math inline">\(r\)</span>进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数<span class="math inline">\(r\)</span>进行假设检验，构造样本相关系数的t-检验统计量。 <span class="math display">\[
-r = \frac{Conv(X,Y)}{Var(X)Var(Y)}
-\]</span> 假设检验用到的t-检验统计量 <span class="math display">\[
-t = \frac{|r|}{\sqrt\frac{1-r^2}{n-2}} \sim t(n-2)
-\]</span></p>
-<h3 id="spearman相关系数">spearman相关系数</h3>
-<p>斯皮尔曼相关系数被定义为等级变量的皮尔逊相关系数，针对秩次的线性相关性分析，计算公式如下 <span class="math display">\[
-\rho = 1-\frac{6\sum d^2_i}{n(n^2-1)},d_i = x_i - y_i
-\]</span></p>
-<h3 id="分类型变量的相关性分析-kendall相关系数">分类型变量的相关性分析-kendall相关系数</h3>
-<p><span class="math display">\[
-\tau = \frac{(number\ of\ concordant\ pairs)-(number\ of\ discordant\ pairs)}{\frac1 2 n(n-1)}
-\]</span></p>
-<h3 id="连续型变量和二元分类变量的相关性分析-point-biserial相关系数">连续型变量和二元分类变量的相关性分析-Point-Biserial相关系数</h3>
-<p><span class="math display">\[
-r_{pb}=\frac{M_1-M_0}{s_n}\sqrt {pq}
-\]</span></p>
-<p>其中</p>
-<p>$ M_1$表示二元变量“1”对应的连续变量的均值</p>
-<p><span class="math inline">\(M_0\)</span> 表示二元变量“0”对应的连续变量的均值</p>
-<p><span class="math inline">\(S_n\)</span>表示连续变量的标准偏差</p>
-<p><span class="math inline">\(p\)</span> 表示二元变量“1”对象占总对象的比例</p>
-<p><span class="math inline">\(q\)</span> 表示二元变量“0”对象占总对象的比例</p>
-<h3 id="偏相关性分析">偏相关性分析</h3>
-<p>Partial correlation is a method used to describe the relationship between two variables <strong>whilst taking away the effects of another variable</strong>, or several other variables, on this relationship.</p>
-<p>Consider a correlation matrix for variables A, B and C <span class="math display">\[
-\begin{equation}       %开始数学环境
-\left(                 %左括号
-  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
-    * &amp; * &amp; *\\  %第一行元素
-    r_{AB} &amp; * &amp; *\\  %第二行元素
-    r_{AC} &amp; r_{BC} &amp; *
-  \end{array}
-\right)                 %右括号
-\end{equation}
-\]</span> The partial correlation of A and B adjusted for C is: <span class="math display">\[
-r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
-\]</span></p>
-<h3 id="卡方检验">卡方检验</h3>
-<p>一种非参数检验，不存在具体参数和总体分布的假设检验。</p>
-<h4 id="卡方拟合优度检验">卡方拟合优度检验</h4>
-<p><span class="math display">\[
-\chi ^2 = \sum \frac{(f_o-f_e)^2}{f_e}
-\]</span></p>
-<p>其中<span class="math inline">\(f_o\)</span>表示观测频数，<span class="math inline">\(f_e\)</span>表示期望频数。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">相关性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘//" class="article-tag-list-link color5">数据挖掘</a>
+        			<a href="/categories/Data-Mining//" class="article-tag-list-link color2">Data Mining</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          时间序列
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/09/05/PageRank/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pagerank</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/" class="archive-article-date">
+  	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
+</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
+    	 
   
-  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/">GBM</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+          
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Data-Mining//" class="article-tag-list-link color2">Data Mining</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -417,10 +276,10 @@ r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

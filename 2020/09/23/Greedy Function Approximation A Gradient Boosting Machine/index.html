@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>相关关系 | quotecao</title>
+  <title>GBM | quotecao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="变量的相关性分析 关系的定义 变量之间关系分为确定性关系，即函数关系和不确定性关系，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。 相关分析 连续型变量的线性相关分析 采用Pearson相关系数\(r\)进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数\(r\)进行假设检验，构造样本相关系数的t-检验统计量。 \">
+  <meta name="description" content="Greedy Function Approximation: A Gradient Boosting Machine Abstract 函数估计&#x2F;近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="相关关系">
-<meta property="og:url" content="http://yoursite.com/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="GBM">
+<meta property="og:url" content="http://yoursite.com/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/index.html">
 <meta property="og:site_name" content="quotecao">
-<meta property="og:description" content="变量的相关性分析 关系的定义 变量之间关系分为确定性关系，即函数关系和不确定性关系，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。 相关分析 连续型变量的线性相关分析 采用Pearson相关系数\(r\)进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数\(r\)进行假设检验，构造样本相关系数的t-检验统计量。 \">
+<meta property="og:description" content="Greedy Function Approximation: A Gradient Boosting Machine Abstract 函数估计&#x2F;近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-09T04:54:00.000Z">
-<meta property="article:modified_time" content="2020-09-10T16:09:17.201Z">
+<meta property="og:image" content="http://yoursite.com/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.2.jpg">
+<meta property="article:published_time" content="2020-09-22T16:16:09.000Z">
+<meta property="article:modified_time" content="2020-09-22T16:40:55.076Z">
 <meta property="article:author" content="cyq">
-<meta property="article:tag" content="相关性">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="quotecao" type="application/atom+xml">
   
@@ -165,76 +167,106 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-连续性变量的相关性分析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Greedy Function Approximation A Gradient Boosting Machine" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      相关关系
+      GBM
     </h1>
   
 
         
-        <a href="/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-09-09T04:54:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-09</time>
+        <a href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/" class="archive-article-date">
+  	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="变量的相关性分析">变量的相关性分析</h1>
-<h2 id="关系的定义">关系的定义</h2>
-<p>变量之间关系分为<strong>确定性关系</strong>，即函数关系和<strong>不确定性关系</strong>，即相关关系。其中相关关系分为平行关系和依存关系，前者采用相关分析的方法，后者采用回归分析的方法。</p>
-<h2 id="相关分析">相关分析</h2>
-<h3 id="连续型变量的线性相关分析">连续型变量的线性相关分析</h3>
-<p>采用Pearson相关系数<span class="math inline">\(r\)</span>进行分析，用样本线性相关系数估计总体线性相关系数，同时对总体的pearson相关系数<span class="math inline">\(r\)</span>进行假设检验，构造样本相关系数的t-检验统计量。 <span class="math display">\[
-r = \frac{Conv(X,Y)}{Var(X)Var(Y)}
-\]</span> 假设检验用到的t-检验统计量 <span class="math display">\[
-t = \frac{|r|}{\sqrt\frac{1-r^2}{n-2}} \sim t(n-2)
+        <h1 id="greedy-function-approximation-a-gradient-boosting-machine">Greedy Function Approximation: A Gradient Boosting Machine</h1>
+<h2 id="abstract">Abstract</h2>
+<p>函数估计/近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用multi-class logistic likelihood。</p>
+<p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
+<h2 id="function-estimation">1. Function estimation</h2>
+<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合<span class="math inline">\(\bold x = \{x_1,...,x_n\}\)</span>组成的一套系统进行分析。通过一组训练样本<span class="math inline">\(\{y_i,\bold x_i\}^N_1\)</span>，目标是得到一个估计<span class="math inline">\(\hat F(x)\)</span>，那也就是最小化定义在<span class="math inline">\((y,\bold x)\)</span>上的某个具体的损失函数<span class="math inline">\(L(y,F(\bold x))\)</span>的期望值， <span class="math display">\[
+F^* = \mathop{\arg\min}_{F}E_{y,\bold x}L(y,F(\bold x)) = \mathop{\arg\min}_{F}E_{\bold x}[E_y(L(y,F(\bold x)))|\bold x]
+\]</span> 通常损失函数<span class="math inline">\(L(y,F)\)</span>选择平方损失<span class="math inline">\((y-F)^2\)</span>和绝对损失<span class="math inline">\(|y-F|\)</span>（回归）, 当<span class="math inline">\(y\in\{-1,1\}\)</span>的分类问题选择negative binomial log-likelihood <span class="math inline">\(log(1+e^{-2yF})\)</span>。本文我们聚焦在加法扩展形式， <span class="math display">\[
+F(\bold x;\{\beta_m,\bold a_m\}^M_1) = \sum_{m=1}^M\beta_mh(\bold x;\bold a_m)
 \]</span></p>
-<h3 id="spearman相关系数">spearman相关系数</h3>
-<p>斯皮尔曼相关系数被定义为等级变量的皮尔逊相关系数，针对秩次的线性相关性分析，计算公式如下 <span class="math display">\[
-\rho = 1-\frac{6\sum d^2_i}{n(n^2-1)},d_i = x_i - y_i
+<h3 id="numerical-optimization">1.1 Numerical optimization</h3>
+<p>一般地，选择一个参数模型<span class="math inline">\(F(\bold x;\bold P)\)</span>, 把funtion optimization 转化为 parameter optimization <span class="math display">\[
+\bold P^* = \mathop{\arg\min}_{\bold P}\Phi(\bold P)
+\]</span> 其中<span class="math inline">\(\Phi(P) = E_{y,\bold x}L(y,F(\bold x;P))\)</span>, 得到<span class="math inline">\(F^*(\bold x) = F(\bold x;P^*)\)</span>,这里参数的解表示成以下形式 <span class="math display">\[
+\bold P^* = \sum^M_{m=0}\bold P_m
+\]</span> 其中<span class="math inline">\(P_0\)</span>是一个初始值，<span class="math inline">\(\{\bold p_m\}^M_1\)</span>是连续的increments(steps or boosts)。</p>
+<h3 id="steepest-descent">1.2 Steepest-descent</h3>
+<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{\bold p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(\bold g_m\)</span>计算如下， <span class="math display">\[
+\bold g_m = \{g_{jm}\} = \{[\frac{\partial \Phi(\bold P)}{\partial P_j}]_{\bold P=\bold P_{m-1}}\}
+\]</span> 其中<span class="math inline">\(\bold P_{m-1} = \sum_{i=0}^{m-1}\bold p_i\)</span>, 这一步计算得到 <span class="math display">\[
+\bold p_m = -\rho_m\bold g_m
+\]</span> 其中 <span class="math display">\[
+\rho_m = \mathop{\arg\min}_{\rho}\Phi(\bold P_{m-1}-\rho \bold g_m)
+\]</span> 其中负梯度<span class="math inline">\(-\bold g_m\)</span>被定义为“steeepest-descent”方向并且上式称为沿着这个方向的“line search”。</p>
+<h2 id="numerical-optimization-in-function-space">2. Numerical optimization in function space</h2>
+<p>这里我们采用一个“非参数”的方法并且在参数空间应用数值优化。我们考虑<span class="math inline">\(F(\bold x)\)</span>在每一个点<span class="math inline">\(\bold x\)</span>是一个参数并且取最小化(现实空间中函数的点具有无限个，这里相当于用有限个点表示函数并且把有限个点的函数值作为参数) <span class="math display">\[
+\Phi(F) = E_{y,\bold x}L(y,F(\bold x)) = E_{\bold x}[E_y(L(y,F(\bold x)))|\bold x]
+\]</span> 或者等价于最小化 <span class="math display">\[
+\phi (F(\bold x)) = E_y[L(y,F(\bold x))|\bold x]
+\]</span> 在每一个<span class="math inline">\(\bold x\)</span>点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的<span class="math inline">\(\{F(\bold x_i)\}^N_1\)</span>。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
+F^*(\bold x) = \sum^M_{m=0}f_m(\bold x)
+\]</span> 其中<span class="math inline">\(f_0(\bold x)\)</span>是一个初始值，<span class="math inline">\(\{f_m(\bold x)\}^M_1\)</span>是连续的incremental functions (steps or boosts)。</p>
+<p>对于steepest-descent <span class="math display">\[
+f_m(\bold x) = -\rho_mg_m(\bold x)
+\]</span> 其中 <span class="math display">\[
+g_m(\bold x) = [\frac{\partial \phi(F(\bold x))}{\partial F(\bold x)}]_{F(\bold x) = F_{m-1}(\bold x)} = [\frac{\partial E_y[L(y,F(\bold x))|\bold x]}{\partial F(\bold x)}]_{F(\bold x) = F_{m-1}(\bold x)}
 \]</span></p>
-<h3 id="分类型变量的相关性分析-kendall相关系数">分类型变量的相关性分析-kendall相关系数</h3>
 <p><span class="math display">\[
-\tau = \frac{(number\ of\ concordant\ pairs)-(number\ of\ discordant\ pairs)}{\frac1 2 n(n-1)}
+F_{m-1}(\bold x) = \sum^{m-1}_{i=0}f_i(\bold x)
 \]</span></p>
-<h3 id="连续型变量和二元分类变量的相关性分析-point-biserial相关系数">连续型变量和二元分类变量的相关性分析-Point-Biserial相关系数</h3>
-<p><span class="math display">\[
-r_{pb}=\frac{M_1-M_0}{s_n}\sqrt {pq}
+<p>假设充分的经验表明微分的可交换性， <span class="math display">\[
+g_m(\bold x) = E_y[\frac{\partial \phi(F(\bold x))}{\partial F(\bold x)}|\bold x]_{F(\bold x) = F_{m-1}(\bold x)} 
+\]</span> 其中乘子<span class="math inline">\(\rho_m\)</span>被线性搜索给出 <span class="math display">\[
+\rho_m = \mathop{\arg\min}_{\rho}E_{y,\bold x}L(y,F_{m-1}(\bold x)-\rho g_m(\bold x))
 \]</span></p>
-<p>其中</p>
-<p>$ M_1$表示二元变量“1”对应的连续变量的均值</p>
-<p><span class="math inline">\(M_0\)</span> 表示二元变量“0”对应的连续变量的均值</p>
-<p><span class="math inline">\(S_n\)</span>表示连续变量的标准偏差</p>
-<p><span class="math inline">\(p\)</span> 表示二元变量“1”对象占总对象的比例</p>
-<p><span class="math inline">\(q\)</span> 表示二元变量“0”对象占总对象的比例</p>
-<h3 id="偏相关性分析">偏相关性分析</h3>
-<p>Partial correlation is a method used to describe the relationship between two variables <strong>whilst taking away the effects of another variable</strong>, or several other variables, on this relationship.</p>
-<p>Consider a correlation matrix for variables A, B and C <span class="math display">\[
-\begin{equation}       %开始数学环境
-\left(                 %左括号
-  \begin{array}{ccc}   %该矩阵一共3列，每一列都居中放置
-    * &amp; * &amp; *\\  %第一行元素
-    r_{AB} &amp; * &amp; *\\  %第二行元素
-    r_{AC} &amp; r_{BC} &amp; *
-  \end{array}
-\right)                 %右括号
-\end{equation}
-\]</span> The partial correlation of A and B adjusted for C is: <span class="math display">\[
-r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
+<h2 id="finite-data">3. Finite data</h2>
+<p>当非参数空间中联合分布<span class="math inline">\((y,\bold x)\)</span>在有限的数据集<span class="math inline">\(\{y_i,\bold x_i\}_1^N\)</span>上面估计的时候会失效。因此尝试“greedy-stagewise”方法，优化下面的期望损失 <span class="math display">\[
+\{\beta_m,\bold a_m\}^M_1 = \mathop{\arg\min}_{\{\beta^{&#39;}_m,\bold a_m^{&#39;}\}}\sum^N_{i=1}L(y_i,\sum ^M_{m=1}\beta^{&#39;}_mh(\bold x_i;\bold a_m^{&#39;}))
+\]</span> 对于<span class="math inline">\(1,2,...,M\)</span>， <span class="math display">\[
+(\beta_m,\bold a_m) = \mathop{\arg\min}_{\{\beta,\bold a\}}\sum^N_{i=1}L(y_i,F_{m-1}(\bold x_i)+\beta h(\bold x_i;\bold a))
+\]</span> 得到 <span class="math display">\[
+F_m(\bold x) = F_{m-1}(\bold x) + \beta_mh(\bold x;\bold a_m)
+\]</span> 总结stagewise策略思想是针对负梯度 <span class="math display">\[
+-g_m(\bold x) = -[\frac{\partial L(y_i,F(\bold x_i))}{\partial F(\bold x_i)}]_{F(\bold x) = F_{m-1}(\bold x)}
+\]</span> 通过优化参数<span class="math inline">\(\bold a_m\)</span>使得<span class="math inline">\(h(\bold x;\bold a)\)</span>和<span class="math inline">\(-g_m(\bold x)\)</span>在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
+\bold a_m =\mathop{\arg\min}_{\bold a,\beta}\sum_{i=1}^N[-g_m(\bold x_i)-\beta h(\bold x_i;\bold a)]^2
+\]</span> <span class="math inline">\(\rho_m\)</span>通过线性搜索的到 <span class="math display">\[
+\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^NL(y_i,F_{m-1}(\bold x_i)+\rho h(\bold x_i;\bold a_m))
+\]</span> 的到如下的近似更新,称<span class="math inline">\(h(x;a)\)</span>为base learner。 <span class="math display">\[
+F_m(\bold x) = F_{m-1}(\bold x) + \rho_mh(\bold x;\bold a_m)
 \]</span></p>
-<h3 id="卡方检验">卡方检验</h3>
-<p>一种非参数检验，不存在具体参数和总体分布的假设检验。</p>
-<h4 id="卡方拟合优度检验">卡方拟合优度检验</h4>
-<p><span class="math display">\[
-\chi ^2 = \sum \frac{(f_o-f_e)^2}{f_e}
-\]</span></p>
-<p>其中<span class="math inline">\(f_o\)</span>表示观测频数，<span class="math inline">\(f_e\)</span>表示期望频数。</p>
+<h4 id="algorithm1-gradient_boost">Algorithm1 : Gradient_Boost</h4>
+<center>
+<img src="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.1.jpg">
+</center>
+<h2 id="applications-additive-modeling">Applications : additive modeling</h2>
+<h3 id="least-squares-regression">4.1 Least-squares regression</h3>
+<p>这里<span class="math inline">\(L(y,F) = (y - F)^2/2\)</span>. 对于算法1中<span class="math inline">\(\hat y_i = y_i - F_{m-1}(\bold x_i)\)</span>。因此算法1的第四行拟合当前的残差并且line search得到<span class="math inline">\(\rho_m = \beta_m\)</span>。</p>
+<h4 id="algorithm2-ls_boost">Algorithm2: LS_Boost</h4>
+<center>
+<img src="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.2.jpg">
+</center>
+<h3 id="least-absolute-deviation-lad-regression">4.2 Least-absolute-deviation (LAD) regression</h3>
+<p>这里损失函数<span class="math inline">\(L(y,F) = |y-F|\)</span>, 对于算法1中 <span class="math display">\[
+\hat y_i=-[\frac{\partial L(y_i,F(\bold x_i))}{\partial F(\bold x_i)}]_{F(\bold x)=F_{m-1}(\bold x)} = sign(y_i-F_{m-1}(\bold x))
+\]</span> 算法1中的第五行变为 <span class="math display">\[
+\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^N|y_i-F_{m-1}(\bold x_i)-\rho h(\bold x_i;\bold a_m)|\\
+=\mathop{\arg\min}_{\rho}\sum_{i=1}^N|h(\bold x_i;\bold a_m)||\frac{y_I-F_{m-1}(\bold x_i)}{h(\bold x_i;\bold a_m)}-\rho|\\
+=median_W\{\frac{y_I-F_{m-1}(\bold x_i)}{h(\bold x_i;\bold a_m)}\}_1^N ,\omega_i=|h(\bold x_i;\bold a_m)|
+\]</span> 其中<span class="math inline">\(median_W{.}\)</span>是权重<span class="math inline">\(\omega_i\)</span>的加权中位数。</p>
 
       
 
@@ -264,24 +296,13 @@ r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">相关性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据挖掘//" class="article-tag-list-link color5">数据挖掘</a>
+        			<a href="/categories/Data-Mining//" class="article-tag-list-link color2">Data Mining</a>
         		</li>
       		
 		</ul>
@@ -336,7 +357,7 @@ r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/09/%E8%BF%9E%E7%BB%AD%E6%80%A7%E5%8F%98%E9%87%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E6%80%A7%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -350,18 +371,18 @@ r_{ABC} = \frac {r_{AB}-r_{AC}r_{BC}}{\sqrt{(1-r^2_{AC})(1-r^2_{BC})}}
   
 <nav id="article-nav">
   
-    <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          时间序列
+          GBM
         
       </div>
     </a>
   
   
-    <a href="/2020/09/05/PageRank/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pagerank</div>
+    <a href="/2020/09/11/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">时间序列</div>
       <i class="icon-circle-right"></i>
     </a>
   
