@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/09/23/GBM/3.1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/23/GBM/3.2.jpg">
 <meta property="article:published_time" content="2020-09-22T16:16:09.000Z">
-<meta property="article:modified_time" content="2020-09-22T17:06:56.738Z">
+<meta property="article:modified_time" content="2020-09-22T17:13:55.975Z">
 <meta property="article:author" content="cyq">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/09/23/GBM/3.1.jpg">
@@ -193,7 +193,8 @@
 <p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
 <a id="more"></a>
 <h2 id="function-estimation">1. Function estimation</h2>
-<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合 $ x = {x_1,...,x_n}<span class="math inline">\(组成的一套系统进行分析。通过一组训练样本\)</span>{y_i, x_i}^N_1<span class="math inline">\(，目标是得到一个估计\)</span>F(x)<span class="math inline">\(，主要是最小化定义在\)</span>(y, x)<span class="math inline">\(上的某个具体的损失函数\)</span>L(y,F( x))$的期望值 <span class="math display">\[
+<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合 <span class="math inline">\(x = \{x_1,...,x_n\}\)</span> 组成的一套系统进行分析。</p>
+<p>通过一组训练样本 <span class="math inline">\(\{y_i, x_i\}^N_1\)</span>，目标是得到一个估计<span class="math inline">\(\hat F(x)\)</span>，主要是最小化定义在 <span class="math inline">\((y, x)\)</span>上的某个具体的损失函数 <span class="math inline">\(L(y,F( x))\)</span> 的期望值 <span class="math display">\[
 F^* = \mathop{\arg\min}_{F}E_{y, x}L(y,F( x)) = \mathop{\arg\min}_{F}E_{ x}[E_y(L(y,F( x)))| x]
 \]</span> 通常损失函数<span class="math inline">\(L(y,F)\)</span>选择平方损失<span class="math inline">\((y-F)^2\)</span>和绝对损失<span class="math inline">\(|y-F|\)</span>（回归）, 当<span class="math inline">\(y\in\{-1,1\}\)</span>的分类问题选择negative binomial log-likelihood <span class="math inline">\(log(1+e^{-2yF})\)</span>。本文我们聚焦在加法扩展形式， <span class="math display">\[
 F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
@@ -242,7 +243,7 @@ g_m( x) = E_y[\frac{\partial \phi(F( x))}{\partial F( x)}| x]_{F( x) = F_{m-1}( 
 F_m( x) = F_{m-1}( x) + \beta_mh( x; a_m)
 \]</span> 总结stagewise策略思想是针对负梯度 <span class="math display">\[
 -g_m( x) = -[\frac{\partial L(y_i,F( x_i))}{\partial F(x_i)}]_{F( x) = F_{m-1}( x)}
-\]</span> 通过优化参数<span class="math inline">\(\bold a_m\)</span>使得<span class="math inline">\(h( x; a)\)</span>和<span class="math inline">\(-g_m(x)\)</span>在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
+\]</span> 通过优化参数$ a_m<span class="math inline">\(使得\)</span>h( x; a)<span class="math inline">\(和\)</span>-g_m(x)$在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
  a_m =\mathop{\arg\min}_{ a,\beta}\sum_{i=1}^N[-g_m( x_i)-\beta h( x_i; a)]^2
 \]</span> <span class="math inline">\(\rho_m\)</span>通过线性搜索的到 <span class="math display">\[
 \rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^NL(y_i,F_{m-1}( x_i)+\rho h( x_i; a_m))
@@ -521,19 +522,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">time-series</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">术语</a>
+                <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">异常</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">术语</a>
               </li>
              
               <li class="article-tag-list-item">
