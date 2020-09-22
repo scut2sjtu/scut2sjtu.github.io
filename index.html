@@ -164,19 +164,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-LightGBM A Highly Efficient Gradient Boosting Decision Tree" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-LGBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/">GBM</a>
+      <a class="article-title" href="/2020/09/23/LGBM/">GBM</a>
     </h1>
   
 
         
-        <a href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/" class="archive-article-date">
+        <a href="/2020/09/23/LGBM/" class="archive-article-date">
   	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
 </a>
         
@@ -204,7 +204,7 @@ H(X) = -\sum _iP(x_i)log_2P(x_i)
 <h3 id="algorithm-description">3.1 Algorithm Description</h3>
 <p>AdaBoost算法对于每一个样本数据都有一个重要性指标，但是这里无法获得。另一种思路是丢弃小梯度相关的样本，但是这样会对降低模型的准确率。GOSS方法保留所有大梯度样本数据并且对小梯度样本数据进行随机采样。具体的，GOSS首先通过样本数据的梯度绝对值进行排序并选择top a * 100%的样本。然后从剩余数据选择b * 100%的样本。同时在计算信息增益的时候GOSS扩大小梯度样本数据通过一个常数<span class="math inline">\(\frac{1-a}{b}\)</span>，这样可以不改变原始数据分布太多。</p>
 <center>
-<img src="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/4.1.jpg">
+<img src="/2020/09/23/LGBM/4.1.jpg">
 </center>
 <h3 id="theoretical-analysis">3.2 Theoretical Analysis</h3>
 <p>GBDT用决策树来学习一个从输入空间<span class="math inline">\(\chi^s\)</span>到梯度空间<span class="math inline">\(G\)</span>的函数。假设我们有一个包含n个独立同分布的数据集<span class="math inline">\(\{x_1,...,x_n\}\)</span>, 其中每一个<span class="math inline">\(x_i\)</span>是输入空间<span class="math inline">\(\chi^s\)</span>中的一个维度s的向量。在每一轮梯度提升的迭代，对于模型的的损失函数关于输出的<strong>负梯度</strong>记作<span class="math inline">\(\{g_1,...,g_n\}\)</span>。决策树模型在最大信息增益处分割每个点。对于GBDT，通常通过分割后的方差来衡量信息增益，定义如下。</p>
@@ -227,7 +227,7 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 <p>高维数据通常是稀疏的，特征空间的系数性为我们设计一种几乎无损的方法来减少特征数量提供可能性。特别地，在一个稀疏的特征空间，许多特征是互斥的，也就是它们从不会同时取得0值。我们能够把互斥特征捆绑成为一个单独的特征（称为EFB）。通过特征扫描算法，我们可以从特征bundle构建与单个特征相同的特征直方图。在这种方式，直方图构建的复杂度从<span class="math inline">\(O(\#data \times \#feature)\)</span>降低到<span class="math inline">\(O(\#data \times \#bundle)\)</span>但是<span class="math inline">\(\#bundle &lt;&lt; \#feature\)</span> 。然后，我们可以大大加快GBDT的训练速度，而不会影响准确性。在下文中，我们将详细展示如何实现这一目标。</p>
 <p>There are two issues to be addressed. The first one is to <strong>determine which features should be bundled together.</strong> The second is <strong>how to construct the bundle</strong>.</p>
 <center>
-<img src="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/4.2.jpg">
+<img src="/2020/09/23/LGBM/4.2.jpg">
 </center>
 <h4 id="定理4.1">定理4.1</h4>
 <p>The problem of partitioning features into a smallest number of exclusive bundles is NP-hard.</p>
@@ -261,7 +261,7 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/23/LightGBM%20A%20Highly%20Efficient%20Gradient%20Boosting%20Decision%20Tree/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/23/LGBM/">展开全文 >></a>
         </p>
       
 
@@ -291,19 +291,19 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 
 
   
-    <article id="post-Greedy Function Approximation A Gradient Boosting Machine" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-GBM" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/">GBM</a>
+      <a class="article-title" href="/2020/09/23/GBM/">GBM</a>
     </h1>
   
 
         
-        <a href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/" class="archive-article-date">
+        <a href="/2020/09/23/GBM/" class="archive-article-date">
   	<time datetime="2020-09-22T16:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-23</time>
 </a>
         
@@ -316,80 +316,80 @@ V_{j|O}(d)=\frac 1 {n_O}(\frac{(\sum_{\{x_i\in O:x_{ij}\leq d\}}g_i)^2}{n_{l|O}^
 <p>函数估计/近似是从函数空间的数值优化的视角出发，而不是参数空间。&quot;boosting&quot;术语从加法模型得来，回归问题中通常使用least-squares, least-absolute-deviation和Huber-M损失函数，分类问题中通常使用multi-class logistic likelihood。</p>
 <p>（知乎）过去我们使用的梯度下降都是在参数空间的梯度下降，变量是参数，而Boosting算法是在函数空间的梯度下降。通过不断梯度下降，我们得到很多个基学习器(函数)，将每个阶段得到的基学习器相加得到最终的学习器。直观地说，<strong>当前基学习器的训练需要知道所有学习器在每一个样本上的表现都差了多少</strong>，然后当前基学习器努力地学习如何将每个样本上差了的部分给补充上来。</p>
 <h2 id="function-estimation">1. Function estimation</h2>
-<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合<span class="math inline">\(\bold x = \{x_1,...,x_n\}\)</span>组成的一套系统进行分析。通过一组训练样本<span class="math inline">\(\{y_i,\bold x_i\}^N_1\)</span>，目标是得到一个估计<span class="math inline">\(\hat F(x)\)</span>，那也就是最小化定义在<span class="math inline">\((y,\bold x)\)</span>上的某个具体的损失函数<span class="math inline">\(L(y,F(\bold x))\)</span>的期望值， <span class="math display">\[
-F^* = \mathop{\arg\min}_{F}E_{y,\bold x}L(y,F(\bold x)) = \mathop{\arg\min}_{F}E_{\bold x}[E_y(L(y,F(\bold x)))|\bold x]
+<p>在函数估计和“预测学习”问题中，通过随机的“output”或“response”变量y和随机的“input”或“explanatory”变量集合$ x = {x_1,...,x_n}<span class="math inline">\(组成的一套系统进行分析。通过一组训练样本\)</span>{y_i, x_i}^N_1<span class="math inline">\(，目标是得到一个估计\)</span>F(x)<span class="math inline">\(，那也就是最小化定义在\)</span>(y, x)<span class="math inline">\(上的某个具体的损失函数\)</span>L(y,F( x))$的期望值， <span class="math display">\[
+F^* = \mathop{\arg\min}_{F}E_{y, x}L(y,F( x)) = \mathop{\arg\min}_{F}E_{ x}[E_y(L(y,F( x)))| x]
 \]</span> 通常损失函数<span class="math inline">\(L(y,F)\)</span>选择平方损失<span class="math inline">\((y-F)^2\)</span>和绝对损失<span class="math inline">\(|y-F|\)</span>（回归）, 当<span class="math inline">\(y\in\{-1,1\}\)</span>的分类问题选择negative binomial log-likelihood <span class="math inline">\(log(1+e^{-2yF})\)</span>。本文我们聚焦在加法扩展形式， <span class="math display">\[
-F(\bold x;\{\beta_m,\bold a_m\}^M_1) = \sum_{m=1}^M\beta_mh(\bold x;\bold a_m)
+F( x;\{\beta_m, a_m\}^M_1) = \sum_{m=1}^M\beta_mh( x; a_m)
 \]</span></p>
 <h3 id="numerical-optimization">1.1 Numerical optimization</h3>
-<p>一般地，选择一个参数模型<span class="math inline">\(F(\bold x;\bold P)\)</span>, 把funtion optimization 转化为 parameter optimization <span class="math display">\[
-\bold P^* = \mathop{\arg\min}_{\bold P}\Phi(\bold P)
-\]</span> 其中<span class="math inline">\(\Phi(P) = E_{y,\bold x}L(y,F(\bold x;P))\)</span>, 得到<span class="math inline">\(F^*(\bold x) = F(\bold x;P^*)\)</span>,这里参数的解表示成以下形式 <span class="math display">\[
-\bold P^* = \sum^M_{m=0}\bold P_m
-\]</span> 其中<span class="math inline">\(P_0\)</span>是一个初始值，<span class="math inline">\(\{\bold p_m\}^M_1\)</span>是连续的increments(steps or boosts)。</p>
+<p>一般地，选择一个参数模型<span class="math inline">\(F( x;P)\)</span>, 把funtion optimization 转化为 parameter optimization <span class="math display">\[
+ P^* = \mathop{\arg\min}_{ P}\Phi( P)
+\]</span> 其中<span class="math inline">\(\Phi(P) = E_{y, x}L(y,F( x;P))\)</span>, 得到<span class="math inline">\(F^*( x) = F( x;P^*)\)</span>,这里参数的解表示成以下形式 <span class="math display">\[
+ P^* = \sum^M_{m=0} P_m
+\]</span> 其中<span class="math inline">\(P_0\)</span>是一个初始值，<span class="math inline">\(\{ p_m\}^M_1\)</span>是连续的increments(steps or boosts)。</p>
 <h3 id="steepest-descent">1.2 Steepest-descent</h3>
-<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{\bold p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(\bold g_m\)</span>计算如下， <span class="math display">\[
-\bold g_m = \{g_{jm}\} = \{[\frac{\partial \Phi(\bold P)}{\partial P_j}]_{\bold P=\bold P_{m-1}}\}
-\]</span> 其中<span class="math inline">\(\bold P_{m-1} = \sum_{i=0}^{m-1}\bold p_i\)</span>, 这一步计算得到 <span class="math display">\[
+<p>Steepest-descent是最简单最常用的数值优化方法之一。<span class="math inline">\(\{ p_m\}^M_1\)</span>的定义如上，首先当前的梯度<span class="math inline">\(\bold g_m\)</span>计算如下， <span class="math display">\[
+ g_m = \{g_{jm}\} = \{[\frac{\partial \Phi( P)}{\partial P_j}]_{ P= P_{m-1}}\}
+\]</span> 其中$ P_{m-1} = _{i=0}^{m-1} p_i$, 这一步计算得到 <span class="math display">\[
 \bold p_m = -\rho_m\bold g_m
 \]</span> 其中 <span class="math display">\[
-\rho_m = \mathop{\arg\min}_{\rho}\Phi(\bold P_{m-1}-\rho \bold g_m)
-\]</span> 其中负梯度<span class="math inline">\(-\bold g_m\)</span>被定义为“steeepest-descent”方向并且上式称为沿着这个方向的“line search”。</p>
+\rho_m = \mathop{\arg\min}_{\rho}\Phi( P_{m-1}-\rho  g_m)
+\]</span> 其中负梯度<span class="math inline">\(- g_m\)</span>被定义为“steeepest-descent”方向并且上式称为沿着这个方向的“line search”。</p>
 <h2 id="numerical-optimization-in-function-space">2. Numerical optimization in function space</h2>
-<p>这里我们采用一个“非参数”的方法并且在参数空间应用数值优化。我们考虑<span class="math inline">\(F(\bold x)\)</span>在每一个点<span class="math inline">\(\bold x\)</span>是一个参数并且取最小化(现实空间中函数的点具有无限个，这里相当于用有限个点表示函数并且把有限个点的函数值作为参数) <span class="math display">\[
-\Phi(F) = E_{y,\bold x}L(y,F(\bold x)) = E_{\bold x}[E_y(L(y,F(\bold x)))|\bold x]
+<p>这里我们采用一个“非参数”的方法并且在参数空间应用数值优化。我们考虑<span class="math inline">\(F( x)\)</span>在每一个点$ x$是一个参数并且取最小化(现实空间中函数的点具有无限个，这里相当于用有限个点表示函数并且把有限个点的函数值作为参数) <span class="math display">\[
+\Phi(F) = E_{y, x}L(y,F( x)) = E_{ x}[E_y(L(y,F( x)))| x]
 \]</span> 或者等价于最小化 <span class="math display">\[
-\phi (F(\bold x)) = E_y[L(y,F(\bold x))|\bold x]
-\]</span> 在每一个<span class="math inline">\(\bold x\)</span>点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的<span class="math inline">\(\{F(\bold x_i)\}^N_1\)</span>。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
-F^*(\bold x) = \sum^M_{m=0}f_m(\bold x)
-\]</span> 其中<span class="math inline">\(f_0(\bold x)\)</span>是一个初始值，<span class="math inline">\(\{f_m(\bold x)\}^M_1\)</span>是连续的incremental functions (steps or boosts)。</p>
+\phi (F( x)) = E_y[L(y,F( x))| x]
+\]</span> 在每一个<span class="math inline">\(\bold x\)</span>点。在函数空间有一个无限数量的参数，但是在下面讨论的数据集仅仅一个包含有限数量的<span class="math inline">\(\{F(x_i)\}^N_1\)</span>。按照数值优化的思路，我们把解表示成如下形式 <span class="math display">\[
+F^*( x) = \sum^M_{m=0}f_m( x)
+\]</span> 其中<span class="math inline">\(f_0( x)\)</span>是一个初始值，<span class="math inline">\(\{f_m( x)\}^M_1\)</span>是连续的incremental functions (steps or boosts)。</p>
 <p>对于steepest-descent <span class="math display">\[
-f_m(\bold x) = -\rho_mg_m(\bold x)
+f_m( x) = -\rho_mg_m( x)
 \]</span> 其中 <span class="math display">\[
-g_m(\bold x) = [\frac{\partial \phi(F(\bold x))}{\partial F(\bold x)}]_{F(\bold x) = F_{m-1}(\bold x)} = [\frac{\partial E_y[L(y,F(\bold x))|\bold x]}{\partial F(\bold x)}]_{F(\bold x) = F_{m-1}(\bold x)}
+g_m( x) = [\frac{\partial \phi(F( x))}{\partial F( x)}]_{F( x) = F_{m-1}( x)} = [\frac{\partial E_y[L(y,F( x))| x]}{\partial F( x)}]_{F(x) = F_{m-1}( x)}
 \]</span></p>
 <p><span class="math display">\[
-F_{m-1}(\bold x) = \sum^{m-1}_{i=0}f_i(\bold x)
+F_{m-1}( x) = \sum^{m-1}_{i=0}f_i( x)
 \]</span></p>
 <p>假设充分的经验表明微分的可交换性， <span class="math display">\[
-g_m(\bold x) = E_y[\frac{\partial \phi(F(\bold x))}{\partial F(\bold x)}|\bold x]_{F(\bold x) = F_{m-1}(\bold x)} 
+g_m( x) = E_y[\frac{\partial \phi(F( x))}{\partial F( x)}| x]_{F( x) = F_{m-1}( x)}
 \]</span> 其中乘子<span class="math inline">\(\rho_m\)</span>被线性搜索给出 <span class="math display">\[
-\rho_m = \mathop{\arg\min}_{\rho}E_{y,\bold x}L(y,F_{m-1}(\bold x)-\rho g_m(\bold x))
+\rho_m = \mathop{\arg\min}_{\rho}E_{y, x}L(y,F_{m-1}( x)-\rho g_m( x))
 \]</span></p>
 <h2 id="finite-data">3. Finite data</h2>
-<p>当非参数空间中联合分布<span class="math inline">\((y,\bold x)\)</span>在有限的数据集<span class="math inline">\(\{y_i,\bold x_i\}_1^N\)</span>上面估计的时候会失效。因此尝试“greedy-stagewise”方法，优化下面的期望损失 <span class="math display">\[
-\{\beta_m,\bold a_m\}^M_1 = \mathop{\arg\min}_{\{\beta^{&#39;}_m,\bold a_m^{&#39;}\}}\sum^N_{i=1}L(y_i,\sum ^M_{m=1}\beta^{&#39;}_mh(\bold x_i;\bold a_m^{&#39;}))
+<p>当非参数空间中联合分布<span class="math inline">\((y, x)\)</span>在有限的数据集<span class="math inline">\(\{y_i, x_i\}_1^N\)</span>上面估计的时候会失效。因此尝试“greedy-stagewise”方法，优化下面的期望损失 <span class="math display">\[
+&lt;center&gt;![](LGBM/4.2.jpg)&lt;/center&gt;
 \]</span> 对于<span class="math inline">\(1,2,...,M\)</span>， <span class="math display">\[
-(\beta_m,\bold a_m) = \mathop{\arg\min}_{\{\beta,\bold a\}}\sum^N_{i=1}L(y_i,F_{m-1}(\bold x_i)+\beta h(\bold x_i;\bold a))
+(\beta_m, a_m) = \mathop{\arg\min}_{\{\beta, a\}}\sum^N_{i=1}L(y_i,F_{m-1}(x_i)+\beta h( x_i;a))
 \]</span> 得到 <span class="math display">\[
-F_m(\bold x) = F_{m-1}(\bold x) + \beta_mh(\bold x;\bold a_m)
+F_m( x) = F_{m-1}( x) + \beta_mh( x; a_m)
 \]</span> 总结stagewise策略思想是针对负梯度 <span class="math display">\[
--g_m(\bold x) = -[\frac{\partial L(y_i,F(\bold x_i))}{\partial F(\bold x_i)}]_{F(\bold x) = F_{m-1}(\bold x)}
-\]</span> 通过优化参数<span class="math inline">\(\bold a_m\)</span>使得<span class="math inline">\(h(\bold x;\bold a)\)</span>和<span class="math inline">\(-g_m(\bold x)\)</span>在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
-\bold a_m =\mathop{\arg\min}_{\bold a,\beta}\sum_{i=1}^N[-g_m(\bold x_i)-\beta h(\bold x_i;\bold a)]^2
+-g_m( x) = -[\frac{\partial L(y_i,F( x_i))}{\partial F(x_i)}]_{F( x) = F_{m-1}( x)}
+\]</span> 通过优化参数<span class="math inline">\(\bold a_m\)</span>使得<span class="math inline">\(h( x; a)\)</span>和<span class="math inline">\(-g_m(x)\)</span>在数据的分布上高度相关，通过如下平方损失优化 <span class="math display">\[
+ a_m =\mathop{\arg\min}_{ a,\beta}\sum_{i=1}^N[-g_m( x_i)-\beta h( x_i; a)]^2
 \]</span> <span class="math inline">\(\rho_m\)</span>通过线性搜索的到 <span class="math display">\[
-\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^NL(y_i,F_{m-1}(\bold x_i)+\rho h(\bold x_i;\bold a_m))
+\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^NL(y_i,F_{m-1}( x_i)+\rho h( x_i; a_m))
 \]</span> 的到如下的近似更新,称<span class="math inline">\(h(x;a)\)</span>为base learner。 <span class="math display">\[
-F_m(\bold x) = F_{m-1}(\bold x) + \rho_mh(\bold x;\bold a_m)
+F_m( x) = F_{m-1}( x) + \rho_mh( x; a_m)
 \]</span></p>
 <h4 id="algorithm1-gradient_boost">Algorithm1 : Gradient_Boost</h4>
 <center>
-<img src="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.1.jpg">
+<img src="/2020/09/23/GBM/3.1.jpg">
 </center>
 <h2 id="applications-additive-modeling">Applications : additive modeling</h2>
 <h3 id="least-squares-regression">4.1 Least-squares regression</h3>
-<p>这里<span class="math inline">\(L(y,F) = (y - F)^2/2\)</span>. 对于算法1中<span class="math inline">\(\hat y_i = y_i - F_{m-1}(\bold x_i)\)</span>。因此算法1的第四行拟合当前的残差并且line search得到<span class="math inline">\(\rho_m = \beta_m\)</span>。</p>
+<p>这里<span class="math inline">\(L(y,F) = (y - F)^2/2\)</span>. 对于算法1中<span class="math inline">\(\hat y_i = y_i - F_{m-1}(\ x_i)\)</span>。因此算法1的第四行拟合当前的残差并且line search得到<span class="math inline">\(\rho_m = \beta_m\)</span>。</p>
 <h4 id="algorithm2-ls_boost">Algorithm2: LS_Boost</h4>
 <center>
-<img src="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/3.2.jpg">
+<img src="/2020/09/23/GBM/3.2.jpg">
 </center>
 <h3 id="least-absolute-deviation-lad-regression">4.2 Least-absolute-deviation (LAD) regression</h3>
 <p>这里损失函数<span class="math inline">\(L(y,F) = |y-F|\)</span>, 对于算法1中 <span class="math display">\[
-\hat y_i=-[\frac{\partial L(y_i,F(\bold x_i))}{\partial F(\bold x_i)}]_{F(\bold x)=F_{m-1}(\bold x)} = sign(y_i-F_{m-1}(\bold x))
+\hat y_i=-[\frac{\partial L(y_i,F( x_i))}{\partial F( x_i)}]_{F( x)=F_{m-1}( x)} = sign(y_i-F_{m-1}( x))
 \]</span> 算法1中的第五行变为 <span class="math display">\[
-\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^N|y_i-F_{m-1}(\bold x_i)-\rho h(\bold x_i;\bold a_m)|\\
-=\mathop{\arg\min}_{\rho}\sum_{i=1}^N|h(\bold x_i;\bold a_m)||\frac{y_I-F_{m-1}(\bold x_i)}{h(\bold x_i;\bold a_m)}-\rho|\\
-=median_W\{\frac{y_I-F_{m-1}(\bold x_i)}{h(\bold x_i;\bold a_m)}\}_1^N ,\omega_i=|h(\bold x_i;\bold a_m)|
+\rho_m =\mathop{\arg\min}_{\rho}\sum_{i=1}^N|y_i-F_{m-1}( x_i)-\rho h( x_i; a_m)|\\
+=\mathop{\arg\min}_{\rho}\sum_{i=1}^N|h( x_i; a_m)||\frac{y_I-F_{m-1}( x_i)}{h(x_i; a_m)}-\rho|\\
+=median_W\{\frac{y_I-F_{m-1}( x_i)}{h( x_i; a_m)}\}_1^N ,\omega_i=|h( x_i; a_m)|
 \]</span> 其中<span class="math inline">\(median_W{.}\)</span>是权重<span class="math inline">\(\omega_i\)</span>的加权中位数。</p>
 
       
@@ -414,7 +414,7 @@ F_m(\bold x) = F_{m-1}(\bold x) + \rho_mh(\bold x;\bold a_m)
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/09/23/Greedy%20Function%20Approximation%20A%20Gradient%20Boosting%20Machine/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/09/23/GBM/">展开全文 >></a>
         </p>
       
 
@@ -1411,7 +1411,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">术语</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1424,14 +1432,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">相关性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图谱</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">挖掘</a>
               </li>
             
             <div class="clearfix"></div>
